@@ -13,7 +13,6 @@ import {
     ShoppingCart,
     Truck,
     LogOut,
-    User,
     ArrowLeft,
 } from 'lucide-react';
 
@@ -114,13 +113,6 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                                 </div>
                             </div>
                             <div className="flex flex-col gap-1">
-                                <Link
-                                    href="/account/profile"
-                                    className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground px-1 py-1 rounded transition-colors"
-                                >
-                                    <User className="h-3.5 w-3.5" />
-                                    Editar perfil
-                                </Link>
                                 <Link
                                     href="/"
                                     className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground px-1 py-1 rounded transition-colors"
