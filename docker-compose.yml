@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:15-alpine
-    container_name: mil_sabores_postgres
+    container_name: pasteleria-project-postgres
     restart: always
     environment:
       POSTGRES_USER: admin
@@ -14,14 +14,14 @@ services:
 
   redis:
     image: redis:7-alpine
-    container_name: mil_sabores_redis
+    container_name: pasteleria-project-redis
     restart: always
     ports:
       - "${REDIS_PORT}:6379"
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
-    container_name: mil_sabores_rabbitmq
+    container_name: pasteleria-project-rabbitmq
     restart: always
     ports:
       - "${RABBITMQ_PORT}:5672"
@@ -33,7 +33,7 @@ services:
   backend:
     build:
       context: ./backend
-    container_name: mil_sabores_backend
+    container_name: pasteleria-project-backend
     restart: always
     ports:
       - "${BACKEND_PORT}:3001"
@@ -57,7 +57,7 @@ services:
         NEXT_PUBLIC_API_URL: http://localhost:${BACKEND_PORT:-3001}/api
         NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME}
         NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET: ${CLOUDINARY_UPLOAD_PRESET}
-    container_name: mil_sabores_frontend
+    container_name: pasteleria-project-frontend
     restart: always
     ports:
       - "${FRONTEND_PORT}:3000"
@@ -66,3 +66,5 @@ services:
 
 volumes:
   postgres_data:
+    external: true
+    name: pasteleria-project_postgres_data
