@@ -6,7 +6,7 @@ export class RegionesService {
 
     async findAll() {
         return this.prisma.region.findMany({
-            include: { comunas: true },
+            include: { ciudades: true, comunas: true },
             orderBy: { nombre: 'asc' },
         });
     }
@@ -14,7 +14,7 @@ export class RegionesService {
     async findOne(id: string) {
         return this.prisma.region.findUnique({
             where: { id },
-            include: { comunas: true },
+            include: { ciudades: true, comunas: true },
         });
     }
 

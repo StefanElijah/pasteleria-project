@@ -13,7 +13,7 @@ export class CreateAddressDto {
 
     @IsOptional()
     @IsString()
-    ciudad?: string;
+    ciudadId?: string;
 
     @IsOptional()
     @IsString()

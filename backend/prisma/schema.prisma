@@ -71,8 +71,9 @@ model Usuario {
   password String
   telefono String?
   avatar   String?
-  rol      RolUsuario    @default(CLIENTE)
-  estado   EstadoUsuario @default(ACTIVO)
+  rol             RolUsuario    @default(CLIENTE)
+  estado          EstadoUsuario @default(ACTIVO)
+  emailVerificado Boolean       @default(false)
 
   // Datos personales validados
   primerNombre    String
@@ -90,6 +91,8 @@ model Usuario {
   direcciones   Direccion[]
   descuentosUsos DescuentoUso[]
   borradores    PedidoBorrador[]
+  descuentos        Descuento[]
+  movimientosPuntos MovimientoPuntos[]
 
   @@index([email])
   @@index([rol])
@@ -135,6 +138,7 @@ model Categoria {
 
   productos  Producto[]
   descuentos Descuento[]
+  promociones PromocionPuntos[]
 
   @@index([slug])
   @@index([activo])
@@ -162,6 +166,7 @@ model Producto {
   categoria   Categoria    @relation(fields: [categoriaId], references: [id])
   itemsPedido ItemPedido[]
   descuentos  Descuento[]
+  promociones PromocionPuntos[]
 
   @@index([categoriaId])
   @@index([slug])
@@ -189,6 +194,9 @@ model Descuento {
   createdAt           DateTime          @default(now())
   updatedAt           DateTime          @updatedAt
 
+  usuarioId String?
+  usuario   Usuario? @relation(fields: [usuarioId], references: [id])
+
   productos  Producto[]
   categorias Categoria[]
   pedidos    Pedido[]
@@ -196,6 +204,7 @@ model Descuento {
 
   @@index([codigo])
   @@index([activo])
+  @@index([usuarioId])
   @@index([fechaInicio, fechaFin])
   @@map("descuentos")
 }
@@ -225,13 +234,14 @@ model Region {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  comunas Comuna[]
+  ciudades Ciudad[]
+  comunas  Comuna[]
 
   @@index([nombre])
   @@map("regiones")
 }
 
-model Comuna {
+model Ciudad {
   id        String   @id @default(cuid())
   nombre    String
   regionId  String
@@ -239,9 +249,28 @@ model Comuna {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  comunas     Comuna[]
   direcciones Direccion[]
 
   @@index([regionId])
+  @@index([nombre])
+  @@map("ciudades")
+}
+
+model Comuna {
+  id        String   @id @default(cuid())
+  nombre    String
+  regionId  String
+  region    Region   @relation(fields: [regionId], references: [id])
+  ciudadId  String
+  ciudad    Ciudad   @relation(fields: [ciudadId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  direcciones Direccion[]
+
+  @@index([regionId])
+  @@index([ciudadId])
   @@index([nombre])
   @@map("comunas")
 }
@@ -250,7 +279,8 @@ model Direccion {
   id           String       @id @default(cuid())
   calle        String
   numero       String
-  ciudad       String?
+  ciudadId     String?
+  ciudad       Ciudad?      @relation(fields: [ciudadId], references: [id])
   codigoPostal String?
   isDefault    Boolean      @default(false)
   tipoVivienda TipoVivienda @default(CASA)
@@ -268,6 +298,7 @@ model Direccion {
   pedidos Pedido[]
 
   @@index([comunaId])
+  @@index([ciudadId])
   @@index([usuarioId])
   @@index([isDefault])
   @@map("direcciones")
@@ -319,6 +350,13 @@ model Pedido {
   // Plataforma desde donde se realizó el pedido
   plataforma String?
 
+  // Puntos de fidelidad
+  puntosUsados    Int @default(0)
+  puntosOtorgados Int @default(0)
+
+  movimientosPuntos MovimientoPuntos[]
+  devoluciones      Devolucion[]
+
   @@index([usuarioId])
   @@index([numeroPedido])
   @@index([estado])
@@ -339,6 +377,8 @@ model ItemPedido {
   pedido     Pedido   @relation(fields: [pedidoId], references: [id])
   productoId String
   producto   Producto @relation(fields: [productoId], references: [id])
+
+  devolucionItems DevolucionItem[]
 
   @@index([pedidoId])
   @@index([productoId])
@@ -382,4 +422,99 @@ model PedidoBorrador {
   @@index([usuarioId])
   @@index([updatedAt])
   @@map("pedidos_borrador")
+}
+
+// ==========================================
+// MODELOS DE FIDELIDAD, CUPONES Y DEVOLUCIONES
+// ==========================================
+
+enum TipoMovimientoPuntos {
+  BONO_BIENVENIDA
+  COMPRA
+  CANJE
+  REVERSION
+  EXPIRACION
+  AJUSTE
+}
+
+enum ObjetivoPromocion {
+  TODO
+  PRODUCTOS
+  CATEGORIAS
+}
+
+enum EstadoDevolucion {
+  SOLICITADA
+  APROBADA
+  RECHAZADA
+  PROCESADA
+}
+
+model MovimientoPuntos {
+  id           String               @id @default(cuid())
+  usuarioId    String
+  usuario      Usuario              @relation(fields: [usuarioId], references: [id])
+  pedidoId     String?
+  pedido       Pedido?              @relation(fields: [pedidoId], references: [id])
+  tipo         TipoMovimientoPuntos
+  puntos       Int
+  saldoDespues Int
+  descripcion  String?
+  expiraEn     DateTime?
+  createdAt    DateTime             @default(now())
+
+  @@index([usuarioId])
+  @@index([expiraEn])
+  @@map("movimientos_puntos")
+}
+
+model PromocionPuntos {
+  id             String            @id @default(cuid())
+  nombre         String
+  bonoPorcentaje Int
+  objetivo       ObjetivoPromocion @default(TODO)
+  fechaInicio    DateTime          @default(now())
+  fechaFin       DateTime?
+  prioridad      Int               @default(0)
+  activo         Boolean           @default(true)
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  productos  Producto[]
+  categorias Categoria[]
+
+  @@index([activo, fechaInicio, fechaFin])
+  @@map("promociones_puntos")
+}
+
+model Devolucion {
+  id                 String           @id @default(cuid())
+  pedidoId           String
+  pedido             Pedido           @relation(fields: [pedidoId], references: [id])
+  estado             EstadoDevolucion @default(SOLICITADA)
+  motivo             String?
+  montoReembolsado   Int              @default(0)
+  puntosRevertidos   Int              @default(0)
+  puntosReintegrados Int              @default(0)
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  items DevolucionItem[]
+
+  @@index([pedidoId])
+  @@index([estado])
+  @@map("devoluciones")
+}
+
+model DevolucionItem {
+  id           String     @id @default(cuid())
+  devolucionId String
+  devolucion   Devolucion @relation(fields: [devolucionId], references: [id], onDelete: Cascade)
+  itemPedidoId String
+  itemPedido   ItemPedido @relation(fields: [itemPedidoId], references: [id])
+  cantidad     Int
+  subtotal     Int
+
+  @@index([devolucionId])
+  @@map("devolucion_items")
 }

@@ -8,9 +8,13 @@ interface ShippingInfo {
     telefonoDestinatario: string;
     calle: string;
     numero: string;
+    regionId: string;
+    ciudadId: string;
     comunaId: string;
+    regionNombre: string;
+    ciudadNombre: string;
+    comunaNombre: string;
     tipoVivienda: string;
-    ciudad: string;
     codigoPostal: string;
     telefonoDomicilio: string;
 }
@@ -20,10 +24,16 @@ interface CheckoutState {
     paymentMethod: string;
     shippingMethod: string;
     shippingCost: number | null;
+    puntosUsados: number;
+    saveAddress: boolean;
+    selectedAddressId: string | null;
     setShippingInfo: (info: Partial<ShippingInfo>) => void;
     setPaymentMethod: (method: string) => void;
     setShippingMethod: (method: string) => void;
     setShippingCost: (cost: number) => void;
+    setPuntosUsados: (puntos: number) => void;
+    setSaveAddress: (value: boolean) => void;
+    setSelectedAddressId: (id: string | null) => void;
     reset: () => void;
 }
 
@@ -34,9 +44,13 @@ const defaultShippingInfo: ShippingInfo = {
     telefonoDestinatario: '',
     calle: '',
     numero: '',
+    regionId: '',
+    ciudadId: '',
     comunaId: '',
-    tipoVivienda: 'CASA',
-    ciudad: '',
+    regionNombre: '',
+    ciudadNombre: '',
+    comunaNombre: '',
+    tipoVivienda: '',
     codigoPostal: '',
     telefonoDomicilio: '',
 };
@@ -48,17 +62,26 @@ export const useCheckoutStore = create<CheckoutState>()(
             paymentMethod: 'EFECTIVO',
             shippingMethod: 'Chilexpress',
             shippingCost: null,
+            puntosUsados: 0,
+            saveAddress: false,
+            selectedAddressId: null,
             setShippingInfo: (info) =>
                 set((state) => ({ shippingInfo: { ...state.shippingInfo, ...info } })),
             setPaymentMethod: (method) => set({ paymentMethod: method }),
             setShippingMethod: (method) => set({ shippingMethod: method }),
             setShippingCost: (cost) => set({ shippingCost: cost }),
+            setPuntosUsados: (puntos) => set({ puntosUsados: puntos }),
+            setSaveAddress: (value) => set({ saveAddress: value }),
+            setSelectedAddressId: (id) => set({ selectedAddressId: id }),
             reset: () =>
                 set({
                     shippingInfo: defaultShippingInfo,
                     paymentMethod: 'EFECTIVO',
                     shippingMethod: 'Chilexpress',
                     shippingCost: null,
+                    puntosUsados: 0,
+                    saveAddress: false,
+                    selectedAddressId: null,
                 }),
         }),
         { name: 'checkout-storage', storage: createJSONStorage(() => localStorage) }

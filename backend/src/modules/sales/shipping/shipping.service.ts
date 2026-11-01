@@ -13,7 +13,7 @@ export class ShippingService {
 
         let costo = 0;
         let dias = 3;
-        if (comuna.region.nombre === 'Metropolitana') {
+        if (comuna.region.id === '13' || comuna.region.nombre.includes('Metropolitana')) {
             if (metodoEnvio === 'Chilexpress') costo = 3000;
             if (metodoEnvio === 'Starken') costo = 2500;
             dias = 1;

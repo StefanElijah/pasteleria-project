@@ -21,7 +21,7 @@ export class EnviosService {
       const [content, totalElements] = await Promise.all([
         this.prisma.envio.findMany({
           where,
-          include: { pedido: { include: { items: true, direccion: { include: { comuna: true } } } } },
+          include: { pedido: { include: { items: true, direccion: { include: { comuna: true, ciudad: true } } } } },
           orderBy: { createdAt: 'desc' },
           skip: page * size,
           take: size,
@@ -39,7 +39,7 @@ export class EnviosService {
 
     return this.prisma.envio.findMany({
       where,
-      include: { pedido: { include: { items: true, direccion: { include: { comuna: true } } } } },
+      include: { pedido: { include: { items: true, direccion: { include: { comuna: true, ciudad: true } } } } },
       orderBy: { createdAt: 'desc' },
     });
   }
@@ -51,7 +51,7 @@ export class EnviosService {
         pedido: {
           include: {
             items: { include: { producto: true } },
-            direccion: { include: { comuna: { include: { region: true } } } },
+            direccion: { include: { comuna: { include: { region: true } }, ciudad: true } },
           },
         },
       },
@@ -67,7 +67,7 @@ export class EnviosService {
         pedido: {
           include: {
             items: { include: { producto: true } },
-            direccion: { include: { comuna: { include: { region: true } } } },
+            direccion: { include: { comuna: { include: { region: true } }, ciudad: true } },
           },
         },
       },
@@ -83,7 +83,7 @@ export class EnviosService {
         pedido: {
           include: {
             items: { include: { producto: true } },
-            direccion: { include: { comuna: { include: { region: true } } } },
+            direccion: { include: { comuna: { include: { region: true } }, ciudad: true } },
           },
         },
       },
@@ -101,7 +101,7 @@ export class EnviosService {
       },
       include: {
         pedido: {
-          include: { items: true, direccion: { include: { comuna: true } } },
+          include: { items: true, direccion: { include: { comuna: true, ciudad: true } } },
         },
       },
       orderBy: { updatedAt: 'desc' },
@@ -133,7 +133,7 @@ export class EnviosService {
         pedido: {
           include: {
             items: { include: { producto: true } },
-            direccion: { include: { comuna: { include: { region: true } } } },
+            direccion: { include: { comuna: { include: { region: true } }, ciudad: true } },
           },
         },
       },

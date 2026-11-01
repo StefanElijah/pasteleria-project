@@ -56,11 +56,35 @@ export interface CartItem {
     image?: string;
 }
 
+export interface Region {
+    id: string;
+    nombre: string;
+    ciudades?: Ciudad[];
+    comunas?: Comuna[];
+}
+
+export interface Ciudad {
+    id: string;
+    nombre: string;
+    regionId: string;
+    region?: Region;
+}
+
+export interface Comuna {
+    id: string;
+    nombre: string;
+    regionId: string;
+    ciudadId: string;
+    region?: Region;
+    ciudad?: Ciudad;
+}
+
 export interface Address {
     id: string;
     calle: string;
     numero: string;
-    ciudad?: string;
+    ciudadId?: string;
+    ciudad?: Ciudad | null;
     codigoPostal?: string;
     telefono?: string;
     isDefault: boolean;
@@ -122,6 +146,70 @@ export interface Envio {
     pedido?: Order;
     createdAt: string;
     updatedAt: string;
+}
+
+export interface Descuento {
+    id: string;
+    nombre: string;
+    codigo?: string | null;
+    tipo: 'PORCENTAJE' | 'MONTO_FIJO' | 'ENVIO_GRATIS';
+    valor: number;
+    objetivo: 'TODO' | 'PRODUCTOS_ESPECIFICOS' | 'CATEGORIAS_ESPECIFICAS';
+    fechaInicio: string;
+    fechaFin?: string | null;
+    activo: boolean;
+    valorMinimoPedido?: number | null;
+    limiteUso?: number | null;
+    limiteUsoPorUsuario?: number | null;
+    contadorUso: number;
+    usuarioId?: string | null;
+    productos?: { id: string; nombre: string }[];
+    categorias?: { id: string; nombre: string }[];
+    createdAt: string;
+}
+
+export interface Promocion {
+    id: string;
+    nombre: string;
+    bonoPorcentaje: number;
+    objetivo: 'TODO' | 'PRODUCTOS' | 'CATEGORIAS';
+    fechaInicio: string;
+    fechaFin?: string | null;
+    prioridad: number;
+    activo: boolean;
+    productos?: { id: string; nombre: string }[];
+    categorias?: { id: string; nombre: string }[];
+}
+
+export interface MovimientoPuntos {
+    id: string;
+    tipo: 'BONO_BIENVENIDA' | 'COMPRA' | 'CANJE' | 'REVERSION' | 'EXPIRACION' | 'AJUSTE';
+    puntos: number;
+    saldoDespues: number;
+    descripcion?: string | null;
+    createdAt: string;
+    expiraEn?: string | null;
+}
+
+export interface DevolucionItem {
+    id: string;
+    itemPedidoId: string;
+    cantidad: number;
+    subtotal: number;
+    itemPedido?: { nombre: string; precio: number };
+}
+
+export interface Devolucion {
+    id: string;
+    pedidoId: string;
+    estado: 'SOLICITADA' | 'APROBADA' | 'RECHAZADA' | 'PROCESADA';
+    motivo?: string | null;
+    montoReembolsado: number;
+    puntosRevertidos: number;
+    puntosReintegrados: number;
+    createdAt: string;
+    items: DevolucionItem[];
+    pedido?: { numeroPedido?: string; total?: number; estado?: string; emailDestinatario?: string };
 }
 
 export interface DashboardStats {

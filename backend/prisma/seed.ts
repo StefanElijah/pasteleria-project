@@ -3,6 +3,8 @@ import { PrismaClient } from '@prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { Pool } from 'pg';
 import * as bcrypt from 'bcrypt';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 const pool = new Pool({
     host: process.env.DB_HOST,
@@ -18,53 +20,104 @@ const prisma = new PrismaClient({ adapter });
 async function main() {
     console.log('🌱 Iniciando seed de base de datos...');
 
-    // 1. Regiones
-    const regionMetropolitana = await prisma.region.upsert({
-        where: { id: '1' },
-        update: {},
-        create: { id: '1', nombre: 'Metropolitana' },
-    });
-    const regionValparaiso = await prisma.region.upsert({
-        where: { id: '2' },
-        update: {},
-        create: { id: '2', nombre: 'Valparaíso' },
-    });
+    // 1. Regiones, ciudades y comunas (división político-administrativa de Chile)
+    const territorio = JSON.parse(
+        readFileSync(join(__dirname, 'data', 'territorio.json'), 'utf-8'),
+    ) as {
+        regiones: { id: string; nombre: string }[];
+        ciudades: { id: string; nombre: string; regionId: string }[];
+        comunas: { id: string; nombre: string; ciudadId: string; regionId: string }[];
+    };
 
-    // 2. Comunas
-    await prisma.comuna.upsert({
-        where: { id: '1' },
-        update: {},
-        create: { id: '1', nombre: 'Santiago', regionId: regionMetropolitana.id },
-    });
-    await prisma.comuna.upsert({
-        where: { id: '2' },
-        update: {},
-        create: { id: '2', nombre: 'Providencia', regionId: regionMetropolitana.id },
-    });
-    await prisma.comuna.upsert({
-        where: { id: '3' },
-        update: {},
-        create: { id: '3', nombre: 'Viña del Mar', regionId: regionValparaiso.id },
-    });
+    for (const region of territorio.regiones) {
+        await prisma.region.upsert({
+            where: { id: region.id },
+            update: { nombre: region.nombre },
+            create: { id: region.id, nombre: region.nombre },
+        });
+    }
 
-    // 3. Categorías
-    const tortas = await prisma.categoria.upsert({
-        where: { slug: 'tortas' },
-        update: {},
-        create: { nombre: 'Tortas', slug: 'tortas', activo: true },
-    });
-    const pasteles = await prisma.categoria.upsert({
-        where: { slug: 'pasteles' },
-        update: {},
-        create: { nombre: 'Pasteles', slug: 'pasteles', activo: true },
-    });
-    const galletas = await prisma.categoria.upsert({
-        where: { slug: 'galletas' },
-        update: {},
-        create: { nombre: 'Galletas', slug: 'galletas', activo: true },
-    });
+    for (const ciudad of territorio.ciudades) {
+        await prisma.ciudad.upsert({
+            where: { id: ciudad.id },
+            update: { nombre: ciudad.nombre, regionId: ciudad.regionId },
+            create: { id: ciudad.id, nombre: ciudad.nombre, regionId: ciudad.regionId },
+        });
+    }
 
-    // 4. Usuario administrador
+    for (const comuna of territorio.comunas) {
+        await prisma.comuna.upsert({
+            where: { id: comuna.id },
+            update: { nombre: comuna.nombre, ciudadId: comuna.ciudadId, regionId: comuna.regionId },
+            create: { id: comuna.id, nombre: comuna.nombre, ciudadId: comuna.ciudadId, regionId: comuna.regionId },
+        });
+    }
+
+    // 2. Catálogo real (categorías y productos)
+    const catalogo = JSON.parse(
+        readFileSync(join(__dirname, 'data', 'catalogo.json'), 'utf-8'),
+    ) as {
+        categorias: { nombre: string; slug: string; descripcion: string | null; activo: boolean; ordenVisual: number }[];
+        productos: {
+            nombre: string;
+            slug: string;
+            descripcion: string | null;
+            precio: number;
+            precioComparacion: number | null;
+            stock: number;
+            imagenPrincipal: string | null;
+            imagenes: string[];
+            novedad: boolean;
+            destacado: boolean;
+            activo: boolean;
+            categoriaSlug: string;
+        }[];
+    };
+
+    const categoriaIdBySlug = new Map<string, string>();
+
+    for (const categoria of catalogo.categorias) {
+        const saved = await prisma.categoria.upsert({
+            where: { slug: categoria.slug },
+            // No pisar cambios hechos desde el admin: solo crear si no existe
+            update: {},
+            create: {
+                nombre: categoria.nombre,
+                slug: categoria.slug,
+                descripcion: categoria.descripcion,
+                activo: categoria.activo,
+                ordenVisual: categoria.ordenVisual,
+            },
+        });
+        categoriaIdBySlug.set(categoria.slug, saved.id);
+    }
+
+    for (const producto of catalogo.productos) {
+        const categoriaId = categoriaIdBySlug.get(producto.categoriaSlug);
+        if (!categoriaId) continue;
+
+        await prisma.producto.upsert({
+            where: { slug: producto.slug },
+            // No pisar cambios hechos desde el admin: solo crear si no existe
+            update: {},
+            create: {
+                nombre: producto.nombre,
+                slug: producto.slug,
+                descripcion: producto.descripcion,
+                precio: producto.precio,
+                precioComparacion: producto.precioComparacion,
+                stock: producto.stock,
+                imagenPrincipal: producto.imagenPrincipal,
+                imagenes: producto.imagenes,
+                novedad: producto.novedad,
+                destacado: producto.destacado,
+                activo: producto.activo,
+                categoriaId,
+            },
+        });
+    }
+
+    // 3. Usuario administrador
     const adminPassword = await bcrypt.hash('admin123', 10);
     const admin = await prisma.usuario.upsert({
         where: { email: 'admin@pasteleria.com' },
@@ -86,7 +139,7 @@ async function main() {
         },
     });
 
-    // 5. Usuario cliente de ejemplo
+    // 4. Usuario cliente de ejemplo
     await prisma.usuario.upsert({
         where: { email: 'cliente@test.com' },
         update: {},
@@ -103,59 +156,7 @@ async function main() {
         },
     });
 
-    // 6. Productos
-    await prisma.producto.upsert({
-        where: { slug: 'torta-chocolate' },
-        update: {},
-        create: {
-            nombre: 'Torta de Chocolate',
-            slug: 'torta-chocolate',
-            descripcion: 'Deliciosa torta de chocolate con cobertura ganache',
-            precio: 15990,
-            stock: 10,
-            imagenes: ['/images/torta-chocolate.jpg'],
-            novedad: true,
-            destacado: true,
-            activo: true,
-            categoriaId: tortas.id,
-        },
-    });
-
-    await prisma.producto.upsert({
-        where: { slug: 'torta-tres-leches' },
-        update: {},
-        create: {
-            nombre: 'Torta Tres Leches',
-            slug: 'torta-tres-leches',
-            descripcion: 'Esponjosa torta bañada en tres leches',
-            precio: 18990,
-            stock: 8,
-            imagenes: ['/images/torta-tres-leches.jpg'],
-            novedad: true,
-            destacado: true,
-            activo: true,
-            categoriaId: tortas.id,
-        },
-    });
-
-    await prisma.producto.upsert({
-        where: { slug: 'galleta-vainilla' },
-        update: {},
-        create: {
-            nombre: 'Galleta de Vainilla',
-            slug: 'galleta-vainilla',
-            descripcion: 'Galletas crujientes de vainilla con chispas',
-            precio: 4990,
-            stock: 50,
-            imagenes: ['/images/galleta-vainilla.jpg'],
-            novedad: false,
-            destacado: false,
-            activo: true,
-            categoriaId: galletas.id,
-        },
-    });
-
-    // 7. Cupón de prueba
+    // 5. Cupón de prueba
     await prisma.descuento.upsert({
         where: { codigo: 'CANJE10' },
         update: {},

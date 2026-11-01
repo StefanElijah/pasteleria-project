@@ -6,8 +6,8 @@ export class ComunasController {
     constructor(private readonly comunasService: ComunasService) { }
 
     @Get()
-    async findAll(@Query('regionId') regionId?: string) {
-        return this.comunasService.findAll(regionId);
+    async findAll(@Query('regionId') regionId?: string, @Query('ciudadId') ciudadId?: string) {
+        return this.comunasService.findAll(regionId, ciudadId);
     }
 
     @Get(':id')

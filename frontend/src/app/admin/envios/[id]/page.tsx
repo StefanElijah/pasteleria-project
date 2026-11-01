@@ -137,10 +137,10 @@ export default function DetalleEnvioPage() {
                         <p>
                             <span className="font-medium">Dirección:</span>{' '}
                             {envio.pedido.direccion.calle} {envio.pedido.direccion.numero}
-                            {envio.pedido.direccion.ciudad && `, ${envio.pedido.direccion.ciudad}`}
                         </p>
                         <p>
                             <span className="font-medium">Comuna:</span> {envio.pedido.direccion.comuna.nombre}
+                            {envio.pedido.direccion.ciudad?.nombre && `, ${envio.pedido.direccion.ciudad.nombre}`}
                             {envio.pedido.direccion.comuna.region && `, ${envio.pedido.direccion.comuna.region.nombre}`}
                         </p>
                     </CardContent>

@@ -8,6 +8,7 @@ import { RedisModule } from './redis/redis.module';
 import { CartModule } from '@modules/sales/cart/cart.module';
 import { RegionesModule } from './modules/locations/regiones/regiones.module';
 import { ComunasModule } from './modules/locations/comunas/comunas.module';
+import { CiudadesModule } from './modules/locations/ciudades/ciudades.module';
 import { AddressesModule } from '@modules/sales/addresses/addresses.module';
 import { OrdersModule } from '@modules/sales/orders/orders.module';
 import { ShippingModule } from '@modules/sales/shipping/shipping.module';
@@ -15,6 +16,11 @@ import { EnviosModule } from '@modules/sales/envios/envios.module';
 import { StatsModule } from './modules/stats/stats.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { CheckoutModule } from '@modules/sales/checkout/checkout.module';
+import { UsersModule } from '@modules/users/users.module';
+import { LoyaltyModule } from '@modules/loyalty/loyalty.module';
+import { DiscountsModule } from '@modules/discounts/discounts.module';
+import { PromocionesModule } from '@modules/promociones/promociones.module';
+import { DevolucionesModule } from '@modules/sales/devoluciones/devoluciones.module';
 
 @Module({
   imports: [
@@ -26,6 +32,7 @@ import { CheckoutModule } from '@modules/sales/checkout/checkout.module';
     CategoriesModule,
     CartModule,
     ComunasModule,
+    CiudadesModule,
     RegionesModule,
     AddressesModule,
     OrdersModule,
@@ -33,7 +40,12 @@ import { CheckoutModule } from '@modules/sales/checkout/checkout.module';
     EnviosModule,
     StatsModule,
     CloudinaryModule,
-    CheckoutModule
+    CheckoutModule,
+    UsersModule,
+    LoyaltyModule,
+    DiscountsModule,
+    PromocionesModule,
+    DevolucionesModule
   ],
 })
 export class AppModule { }

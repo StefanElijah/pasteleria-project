@@ -1,6 +1,6 @@
 import {
     IsString, IsNotEmpty, IsArray, ValidateNested, IsOptional,
-    IsEnum, Min, IsUUID, ValidateIf, IsInt, IsEmail
+    IsEnum, Min, IsUUID, ValidateIf, IsInt, IsEmail, IsBoolean
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { MetodoPago, TipoVivienda } from '@prisma/client';
@@ -26,7 +26,7 @@ export class TemporaryAddressDto {
 
     @IsOptional()
     @IsString()
-    ciudad?: string;
+    ciudadId?: string;
 
     @IsOptional()
     @IsString()
@@ -115,4 +115,20 @@ export class CreateOrderDto {
   @IsOptional()
   @IsString()
   plataforma?: string;
+
+  // Puntos a canjear (1 punto = $1)
+  @IsOptional()
+  @IsInt()
+  @Min(0)
+  puntosUsados?: number;
+
+  // Guardar la dirección en la libreta del usuario
+  @IsOptional()
+  @IsBoolean()
+  guardarDireccion?: boolean;
+
+  // Dirección de la libreta a actualizar (si ya existía)
+  @IsOptional()
+  @IsString()
+  direccionGuardadaId?: string;
 }

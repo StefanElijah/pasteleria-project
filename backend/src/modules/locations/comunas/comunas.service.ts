@@ -4,12 +4,13 @@ import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 export class ComunasService {
     constructor(@Inject('PrismaClient') private prisma: any) { }
 
-    async findAll(regionId?: string) {
+    async findAll(regionId?: string, ciudadId?: string) {
         const where: any = {};
         if (regionId) where.regionId = regionId;
+        if (ciudadId) where.ciudadId = ciudadId;
         return this.prisma.comuna.findMany({
             where,
-            include: { region: true },
+            include: { region: true, ciudad: true },
             orderBy: { nombre: 'asc' },
         });
     }
@@ -17,7 +18,7 @@ export class ComunasService {
     async findOne(id: string) {
         const comuna = await this.prisma.comuna.findUnique({
             where: { id },
-            include: { region: true },
+            include: { region: true, ciudad: true },
         });
         if (!comuna) throw new NotFoundException('Comuna no encontrada');
         return comuna;

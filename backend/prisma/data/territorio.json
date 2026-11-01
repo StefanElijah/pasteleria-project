@@ -1,0 +1,2428 @@
+{
+    "regiones":  [
+                     {
+                         "id":  "02",
+                         "nombre":  "Región de Antofagasta"
+                     },
+                     {
+                         "id":  "15",
+                         "nombre":  "Región de Arica y Parinacota"
+                     },
+                     {
+                         "id":  "03",
+                         "nombre":  "Región de Atacama"
+                     },
+                     {
+                         "id":  "11",
+                         "nombre":  "Región de Aysén"
+                     },
+                     {
+                         "id":  "04",
+                         "nombre":  "Región de Coquimbo"
+                     },
+                     {
+                         "id":  "09",
+                         "nombre":  "Región de La Araucanía"
+                     },
+                     {
+                         "id":  "10",
+                         "nombre":  "Región de Los Lagos"
+                     },
+                     {
+                         "id":  "14",
+                         "nombre":  "Región de Los Ríos"
+                     },
+                     {
+                         "id":  "08",
+                         "nombre":  "Región del Biobío"
+                     },
+                     {
+                         "id":  "06",
+                         "nombre":  "Región de O\u0027Higgins"
+                     },
+                     {
+                         "id":  "07",
+                         "nombre":  "Región del Maule"
+                     },
+                     {
+                         "id":  "12",
+                         "nombre":  "Región de Magallanes"
+                     },
+                     {
+                         "id":  "13",
+                         "nombre":  "Región Metropolitana de Santiago"
+                     },
+                     {
+                         "id":  "16",
+                         "nombre":  "Región de Ñuble"
+                     },
+                     {
+                         "id":  "01",
+                         "nombre":  "Región de Tarapacá"
+                     },
+                     {
+                         "id":  "05",
+                         "nombre":  "Región de Valparaíso"
+                     }
+                 ],
+    "ciudades":  [
+                     {
+                         "id":  "122",
+                         "nombre":  "Antártica Chilena",
+                         "regionId":  "12"
+                     },
+                     {
+                         "id":  "021",
+                         "nombre":  "Antofagasta",
+                         "regionId":  "02"
+                     },
+                     {
+                         "id":  "082",
+                         "nombre":  "Arauco",
+                         "regionId":  "08"
+                     },
+                     {
+                         "id":  "151",
+                         "nombre":  "Arica",
+                         "regionId":  "15"
+                     },
+                     {
+                         "id":  "112",
+                         "nombre":  "Aysén",
+                         "regionId":  "11"
+                     },
+                     {
+                         "id":  "083",
+                         "nombre":  "Biobío",
+                         "regionId":  "08"
+                     },
+                     {
+                         "id":  "061",
+                         "nombre":  "Cachapoal",
+                         "regionId":  "06"
+                     },
+                     {
+                         "id":  "113",
+                         "nombre":  "Capitán Prat",
+                         "regionId":  "11"
+                     },
+                     {
+                         "id":  "062",
+                         "nombre":  "Cardenal Caro",
+                         "regionId":  "06"
+                     },
+                     {
+                         "id":  "072",
+                         "nombre":  "Cauquenes",
+                         "regionId":  "07"
+                     },
+                     {
+                         "id":  "091",
+                         "nombre":  "Cautín",
+                         "regionId":  "09"
+                     },
+                     {
+                         "id":  "133",
+                         "nombre":  "Chacabuco",
+                         "regionId":  "13"
+                     },
+                     {
+                         "id":  "032",
+                         "nombre":  "Chañaral",
+                         "regionId":  "03"
+                     },
+                     {
+                         "id":  "102",
+                         "nombre":  "Chiloé",
+                         "regionId":  "10"
+                     },
+                     {
+                         "id":  "042",
+                         "nombre":  "Choapa",
+                         "regionId":  "04"
+                     },
+                     {
+                         "id":  "111",
+                         "nombre":  "Coihaique",
+                         "regionId":  "11"
+                     },
+                     {
+                         "id":  "063",
+                         "nombre":  "Colchagua",
+                         "regionId":  "06"
+                     },
+                     {
+                         "id":  "081",
+                         "nombre":  "Concepción",
+                         "regionId":  "08"
+                     },
+                     {
+                         "id":  "031",
+                         "nombre":  "Copiapó",
+                         "regionId":  "03"
+                     },
+                     {
+                         "id":  "132",
+                         "nombre":  "Cordillera",
+                         "regionId":  "13"
+                     },
+                     {
+                         "id":  "073",
+                         "nombre":  "Curicó",
+                         "regionId":  "07"
+                     },
+                     {
+                         "id":  "161",
+                         "nombre":  "Diguillín",
+                         "regionId":  "16"
+                     },
+                     {
+                         "id":  "022",
+                         "nombre":  "El Loa",
+                         "regionId":  "02"
+                     },
+                     {
+                         "id":  "041",
+                         "nombre":  "Elqui",
+                         "regionId":  "04"
+                     },
+                     {
+                         "id":  "114",
+                         "nombre":  "General Carrera",
+                         "regionId":  "11"
+                     },
+                     {
+                         "id":  "033",
+                         "nombre":  "Huasco",
+                         "regionId":  "03"
+                     },
+                     {
+                         "id":  "011",
+                         "nombre":  "Iquique",
+                         "regionId":  "01"
+                     },
+                     {
+                         "id":  "052",
+                         "nombre":  "Isla de Pascua",
+                         "regionId":  "05"
+                     },
+                     {
+                         "id":  "162",
+                         "nombre":  "Itata",
+                         "regionId":  "16"
+                     },
+                     {
+                         "id":  "043",
+                         "nombre":  "Limarí",
+                         "regionId":  "04"
+                     },
+                     {
+                         "id":  "074",
+                         "nombre":  "Linares",
+                         "regionId":  "07"
+                     },
+                     {
+                         "id":  "101",
+                         "nombre":  "Llanquihue",
+                         "regionId":  "10"
+                     },
+                     {
+                         "id":  "053",
+                         "nombre":  "Los Andes",
+                         "regionId":  "05"
+                     },
+                     {
+                         "id":  "121",
+                         "nombre":  "Magallanes",
+                         "regionId":  "12"
+                     },
+                     {
+                         "id":  "134",
+                         "nombre":  "Maipo",
+                         "regionId":  "13"
+                     },
+                     {
+                         "id":  "092",
+                         "nombre":  "Malleco",
+                         "regionId":  "09"
+                     },
+                     {
+                         "id":  "058",
+                         "nombre":  "Marga Marga",
+                         "regionId":  "05"
+                     },
+                     {
+                         "id":  "135",
+                         "nombre":  "Melipilla",
+                         "regionId":  "13"
+                     },
+                     {
+                         "id":  "103",
+                         "nombre":  "Osorno",
+                         "regionId":  "10"
+                     },
+                     {
+                         "id":  "104",
+                         "nombre":  "Palena",
+                         "regionId":  "10"
+                     },
+                     {
+                         "id":  "152",
+                         "nombre":  "Parinacota",
+                         "regionId":  "15"
+                     },
+                     {
+                         "id":  "054",
+                         "nombre":  "Petorca",
+                         "regionId":  "05"
+                     },
+                     {
+                         "id":  "163",
+                         "nombre":  "Punilla",
+                         "regionId":  "16"
+                     },
+                     {
+                         "id":  "055",
+                         "nombre":  "Quillota",
+                         "regionId":  "05"
+                     },
+                     {
+                         "id":  "142",
+                         "nombre":  "Ranco",
+                         "regionId":  "14"
+                     },
+                     {
+                         "id":  "056",
+                         "nombre":  "San Antonio",
+                         "regionId":  "05"
+                     },
+                     {
+                         "id":  "057",
+                         "nombre":  "San Felipe de Aconcagua",
+                         "regionId":  "05"
+                     },
+                     {
+                         "id":  "131",
+                         "nombre":  "Santiago",
+                         "regionId":  "13"
+                     },
+                     {
+                         "id":  "136",
+                         "nombre":  "Talagante",
+                         "regionId":  "13"
+                     },
+                     {
+                         "id":  "071",
+                         "nombre":  "Talca",
+                         "regionId":  "07"
+                     },
+                     {
+                         "id":  "014",
+                         "nombre":  "Tamarugal",
+                         "regionId":  "01"
+                     },
+                     {
+                         "id":  "123",
+                         "nombre":  "Tierra del Fuego",
+                         "regionId":  "12"
+                     },
+                     {
+                         "id":  "023",
+                         "nombre":  "Tocopilla",
+                         "regionId":  "02"
+                     },
+                     {
+                         "id":  "124",
+                         "nombre":  "Última Esperanza",
+                         "regionId":  "12"
+                     },
+                     {
+                         "id":  "141",
+                         "nombre":  "Valdivia",
+                         "regionId":  "14"
+                     },
+                     {
+                         "id":  "051",
+                         "nombre":  "Valparaíso",
+                         "regionId":  "05"
+                     }
+                 ],
+    "comunas":  [
+                    {
+                        "id":  "05602",
+                        "nombre":  "Algarrobo",
+                        "ciudadId":  "056",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "13502",
+                        "nombre":  "Alhué",
+                        "ciudadId":  "135",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "08314",
+                        "nombre":  "Alto Biobío",
+                        "ciudadId":  "083",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "03302",
+                        "nombre":  "Alto del Carmen",
+                        "ciudadId":  "033",
+                        "regionId":  "03"
+                    },
+                    {
+                        "id":  "01107",
+                        "nombre":  "Alto Hospicio",
+                        "ciudadId":  "011",
+                        "regionId":  "01"
+                    },
+                    {
+                        "id":  "10202",
+                        "nombre":  "Ancud",
+                        "ciudadId":  "102",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "04103",
+                        "nombre":  "Andacollo",
+                        "ciudadId":  "041",
+                        "regionId":  "04"
+                    },
+                    {
+                        "id":  "09201",
+                        "nombre":  "Angol",
+                        "ciudadId":  "092",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "12202",
+                        "nombre":  "Antártica",
+                        "ciudadId":  "122",
+                        "regionId":  "12"
+                    },
+                    {
+                        "id":  "02101",
+                        "nombre":  "Antofagasta",
+                        "ciudadId":  "021",
+                        "regionId":  "02"
+                    },
+                    {
+                        "id":  "08302",
+                        "nombre":  "Antuco",
+                        "ciudadId":  "083",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "08202",
+                        "nombre":  "Arauco",
+                        "ciudadId":  "082",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "15101",
+                        "nombre":  "Arica",
+                        "ciudadId":  "151",
+                        "regionId":  "15"
+                    },
+                    {
+                        "id":  "11201",
+                        "nombre":  "Aysén",
+                        "ciudadId":  "112",
+                        "regionId":  "11"
+                    },
+                    {
+                        "id":  "13402",
+                        "nombre":  "Buin",
+                        "ciudadId":  "134",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "16102",
+                        "nombre":  "Bulnes",
+                        "ciudadId":  "161",
+                        "regionId":  "16"
+                    },
+                    {
+                        "id":  "05402",
+                        "nombre":  "Cabildo",
+                        "ciudadId":  "054",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "12201",
+                        "nombre":  "Cabo de Hornos",
+                        "ciudadId":  "122",
+                        "regionId":  "12"
+                    },
+                    {
+                        "id":  "08303",
+                        "nombre":  "Cabrero",
+                        "ciudadId":  "083",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "02201",
+                        "nombre":  "Calama",
+                        "ciudadId":  "022",
+                        "regionId":  "02"
+                    },
+                    {
+                        "id":  "10102",
+                        "nombre":  "Calbuco",
+                        "ciudadId":  "101",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "03102",
+                        "nombre":  "Caldera",
+                        "ciudadId":  "031",
+                        "regionId":  "03"
+                    },
+                    {
+                        "id":  "05502",
+                        "nombre":  "Calera",
+                        "ciudadId":  "055",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "13403",
+                        "nombre":  "Calera de Tango",
+                        "ciudadId":  "134",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "05302",
+                        "nombre":  "Calle Larga",
+                        "ciudadId":  "053",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "15102",
+                        "nombre":  "Camarones",
+                        "ciudadId":  "151",
+                        "regionId":  "15"
+                    },
+                    {
+                        "id":  "01402",
+                        "nombre":  "Camiña",
+                        "ciudadId":  "014",
+                        "regionId":  "01"
+                    },
+                    {
+                        "id":  "04202",
+                        "nombre":  "Canela",
+                        "ciudadId":  "042",
+                        "regionId":  "04"
+                    },
+                    {
+                        "id":  "08203",
+                        "nombre":  "Cañete",
+                        "ciudadId":  "082",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "09102",
+                        "nombre":  "Carahue",
+                        "ciudadId":  "091",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "05603",
+                        "nombre":  "Cartagena",
+                        "ciudadId":  "056",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "05102",
+                        "nombre":  "Casablanca",
+                        "ciudadId":  "051",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "10201",
+                        "nombre":  "Castro",
+                        "ciudadId":  "102",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "05702",
+                        "nombre":  "Catemu",
+                        "ciudadId":  "057",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "07201",
+                        "nombre":  "Cauquenes",
+                        "ciudadId":  "072",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "13102",
+                        "nombre":  "Cerrillos",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "13103",
+                        "nombre":  "Cerro Navia",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "10401",
+                        "nombre":  "Chaitén",
+                        "ciudadId":  "104",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "07202",
+                        "nombre":  "Chanco",
+                        "ciudadId":  "072",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "03201",
+                        "nombre":  "Chañaral",
+                        "ciudadId":  "032",
+                        "regionId":  "03"
+                    },
+                    {
+                        "id":  "06302",
+                        "nombre":  "Chépica",
+                        "ciudadId":  "063",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "08103",
+                        "nombre":  "Chiguayante",
+                        "ciudadId":  "081",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "11401",
+                        "nombre":  "Chile Chico",
+                        "ciudadId":  "114",
+                        "regionId":  "11"
+                    },
+                    {
+                        "id":  "16101",
+                        "nombre":  "Chillán",
+                        "ciudadId":  "161",
+                        "regionId":  "16"
+                    },
+                    {
+                        "id":  "16103",
+                        "nombre":  "Chillán Viejo",
+                        "ciudadId":  "161",
+                        "regionId":  "16"
+                    },
+                    {
+                        "id":  "06303",
+                        "nombre":  "Chimbarongo",
+                        "ciudadId":  "063",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "09121",
+                        "nombre":  "Cholchol",
+                        "ciudadId":  "091",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "10203",
+                        "nombre":  "Chonchi",
+                        "ciudadId":  "102",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "11202",
+                        "nombre":  "Cisnes",
+                        "ciudadId":  "112",
+                        "regionId":  "11"
+                    },
+                    {
+                        "id":  "16202",
+                        "nombre":  "Cobquecura",
+                        "ciudadId":  "162",
+                        "regionId":  "16"
+                    },
+                    {
+                        "id":  "10103",
+                        "nombre":  "Cochamó",
+                        "ciudadId":  "101",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "11301",
+                        "nombre":  "Cochrane",
+                        "ciudadId":  "113",
+                        "regionId":  "11"
+                    },
+                    {
+                        "id":  "06102",
+                        "nombre":  "Codegua",
+                        "ciudadId":  "061",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "16203",
+                        "nombre":  "Coelemu",
+                        "ciudadId":  "162",
+                        "regionId":  "16"
+                    },
+                    {
+                        "id":  "11101",
+                        "nombre":  "Coihaique",
+                        "ciudadId":  "111",
+                        "regionId":  "11"
+                    },
+                    {
+                        "id":  "16302",
+                        "nombre":  "Coihueco",
+                        "ciudadId":  "163",
+                        "regionId":  "16"
+                    },
+                    {
+                        "id":  "06103",
+                        "nombre":  "Coinco",
+                        "ciudadId":  "061",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "07402",
+                        "nombre":  "Colbún",
+                        "ciudadId":  "074",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "01403",
+                        "nombre":  "Colchane",
+                        "ciudadId":  "014",
+                        "regionId":  "01"
+                    },
+                    {
+                        "id":  "13301",
+                        "nombre":  "Colina",
+                        "ciudadId":  "133",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "09202",
+                        "nombre":  "Collipulli",
+                        "ciudadId":  "092",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "06104",
+                        "nombre":  "Coltauco",
+                        "ciudadId":  "061",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "04302",
+                        "nombre":  "Combarbalá",
+                        "ciudadId":  "043",
+                        "regionId":  "04"
+                    },
+                    {
+                        "id":  "08101",
+                        "nombre":  "Concepción",
+                        "ciudadId":  "081",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "13104",
+                        "nombre":  "Conchalí",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "05103",
+                        "nombre":  "Concón",
+                        "ciudadId":  "051",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "07102",
+                        "nombre":  "Constitución",
+                        "ciudadId":  "071",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "08204",
+                        "nombre":  "Contulmo",
+                        "ciudadId":  "082",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "03101",
+                        "nombre":  "Copiapó",
+                        "ciudadId":  "031",
+                        "regionId":  "03"
+                    },
+                    {
+                        "id":  "04102",
+                        "nombre":  "Coquimbo",
+                        "ciudadId":  "041",
+                        "regionId":  "04"
+                    },
+                    {
+                        "id":  "08102",
+                        "nombre":  "Coronel",
+                        "ciudadId":  "081",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "14102",
+                        "nombre":  "Corral",
+                        "ciudadId":  "141",
+                        "regionId":  "14"
+                    },
+                    {
+                        "id":  "09103",
+                        "nombre":  "Cunco",
+                        "ciudadId":  "091",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "09203",
+                        "nombre":  "Curacautín",
+                        "ciudadId":  "092",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "13503",
+                        "nombre":  "Curacaví",
+                        "ciudadId":  "135",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "10204",
+                        "nombre":  "Curaco de Vélez",
+                        "ciudadId":  "102",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "08205",
+                        "nombre":  "Curanilahue",
+                        "ciudadId":  "082",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "09104",
+                        "nombre":  "Curarrehue",
+                        "ciudadId":  "091",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "07103",
+                        "nombre":  "Curepto",
+                        "ciudadId":  "071",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "07301",
+                        "nombre":  "Curicó",
+                        "ciudadId":  "073",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "10205",
+                        "nombre":  "Dalcahue",
+                        "ciudadId":  "102",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "03202",
+                        "nombre":  "Diego de Almagro",
+                        "ciudadId":  "032",
+                        "regionId":  "03"
+                    },
+                    {
+                        "id":  "06105",
+                        "nombre":  "Doñihue",
+                        "ciudadId":  "061",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "13105",
+                        "nombre":  "El Bosque",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "16104",
+                        "nombre":  "El Carmen",
+                        "ciudadId":  "161",
+                        "regionId":  "16"
+                    },
+                    {
+                        "id":  "13602",
+                        "nombre":  "El Monte",
+                        "ciudadId":  "136",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "05604",
+                        "nombre":  "El Quisco",
+                        "ciudadId":  "056",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "05605",
+                        "nombre":  "El Tabo",
+                        "ciudadId":  "056",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "07104",
+                        "nombre":  "Empedrado",
+                        "ciudadId":  "071",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "09204",
+                        "nombre":  "Ercilla",
+                        "ciudadId":  "092",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "13106",
+                        "nombre":  "Estación Central",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "08104",
+                        "nombre":  "Florida",
+                        "ciudadId":  "081",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "09105",
+                        "nombre":  "Freire",
+                        "ciudadId":  "091",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "03303",
+                        "nombre":  "Freirina",
+                        "ciudadId":  "033",
+                        "regionId":  "03"
+                    },
+                    {
+                        "id":  "10104",
+                        "nombre":  "Fresia",
+                        "ciudadId":  "101",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "10105",
+                        "nombre":  "Frutillar",
+                        "ciudadId":  "101",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "10402",
+                        "nombre":  "Futaleufú",
+                        "ciudadId":  "104",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "14202",
+                        "nombre":  "Futrono",
+                        "ciudadId":  "142",
+                        "regionId":  "14"
+                    },
+                    {
+                        "id":  "09106",
+                        "nombre":  "Galvarino",
+                        "ciudadId":  "091",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "15202",
+                        "nombre":  "General Lagos",
+                        "ciudadId":  "152",
+                        "regionId":  "15"
+                    },
+                    {
+                        "id":  "09107",
+                        "nombre":  "Gorbea",
+                        "ciudadId":  "091",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "06106",
+                        "nombre":  "Graneros",
+                        "ciudadId":  "061",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "11203",
+                        "nombre":  "Guaitecas",
+                        "ciudadId":  "112",
+                        "regionId":  "11"
+                    },
+                    {
+                        "id":  "05503",
+                        "nombre":  "Hijuelas",
+                        "ciudadId":  "055",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "10403",
+                        "nombre":  "Hualaihué",
+                        "ciudadId":  "104",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "07302",
+                        "nombre":  "Hualañé",
+                        "ciudadId":  "073",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "08112",
+                        "nombre":  "Hualpén",
+                        "ciudadId":  "081",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "08105",
+                        "nombre":  "Hualqui",
+                        "ciudadId":  "081",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "01404",
+                        "nombre":  "Huara",
+                        "ciudadId":  "014",
+                        "regionId":  "01"
+                    },
+                    {
+                        "id":  "03304",
+                        "nombre":  "Huasco",
+                        "ciudadId":  "033",
+                        "regionId":  "03"
+                    },
+                    {
+                        "id":  "13107",
+                        "nombre":  "Huechuraba",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "04201",
+                        "nombre":  "Illapel",
+                        "ciudadId":  "042",
+                        "regionId":  "04"
+                    },
+                    {
+                        "id":  "13108",
+                        "nombre":  "Independencia",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "01101",
+                        "nombre":  "Iquique",
+                        "ciudadId":  "011",
+                        "regionId":  "01"
+                    },
+                    {
+                        "id":  "13603",
+                        "nombre":  "Isla de Maipo",
+                        "ciudadId":  "136",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "05201",
+                        "nombre":  "Isla de Pascua",
+                        "ciudadId":  "052",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "05104",
+                        "nombre":  "Juan Fernández",
+                        "ciudadId":  "051",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "13109",
+                        "nombre":  "La Cisterna",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "05504",
+                        "nombre":  "La Cruz",
+                        "ciudadId":  "055",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "06202",
+                        "nombre":  "La Estrella",
+                        "ciudadId":  "062",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "13110",
+                        "nombre":  "La Florida",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "13111",
+                        "nombre":  "La Granja",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "04104",
+                        "nombre":  "La Higuera",
+                        "ciudadId":  "041",
+                        "regionId":  "04"
+                    },
+                    {
+                        "id":  "05401",
+                        "nombre":  "La Ligua",
+                        "ciudadId":  "054",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "13112",
+                        "nombre":  "La Pintana",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "13113",
+                        "nombre":  "La Reina",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "04101",
+                        "nombre":  "La Serena",
+                        "ciudadId":  "041",
+                        "regionId":  "04"
+                    },
+                    {
+                        "id":  "14201",
+                        "nombre":  "La Unión",
+                        "ciudadId":  "142",
+                        "regionId":  "14"
+                    },
+                    {
+                        "id":  "14203",
+                        "nombre":  "Lago Ranco",
+                        "ciudadId":  "142",
+                        "regionId":  "14"
+                    },
+                    {
+                        "id":  "11102",
+                        "nombre":  "Lago Verde",
+                        "ciudadId":  "111",
+                        "regionId":  "11"
+                    },
+                    {
+                        "id":  "12102",
+                        "nombre":  "Laguna Blanca",
+                        "ciudadId":  "121",
+                        "regionId":  "12"
+                    },
+                    {
+                        "id":  "08304",
+                        "nombre":  "Laja",
+                        "ciudadId":  "083",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "13302",
+                        "nombre":  "Lampa",
+                        "ciudadId":  "133",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "14103",
+                        "nombre":  "Lanco",
+                        "ciudadId":  "141",
+                        "regionId":  "14"
+                    },
+                    {
+                        "id":  "06107",
+                        "nombre":  "Las Cabras",
+                        "ciudadId":  "061",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "13114",
+                        "nombre":  "Las Condes",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "09108",
+                        "nombre":  "Lautaro",
+                        "ciudadId":  "091",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "08201",
+                        "nombre":  "Lebu",
+                        "ciudadId":  "082",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "07303",
+                        "nombre":  "Licantén",
+                        "ciudadId":  "073",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "05802",
+                        "nombre":  "Limache",
+                        "ciudadId":  "058",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "07401",
+                        "nombre":  "Linares",
+                        "ciudadId":  "074",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "06203",
+                        "nombre":  "Litueche",
+                        "ciudadId":  "062",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "05703",
+                        "nombre":  "Llaillay",
+                        "ciudadId":  "057",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "10107",
+                        "nombre":  "Llanquihue",
+                        "ciudadId":  "101",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "13115",
+                        "nombre":  "Lo Barnechea",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "13116",
+                        "nombre":  "Lo Espejo",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "13117",
+                        "nombre":  "Lo Prado",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "06304",
+                        "nombre":  "Lolol",
+                        "ciudadId":  "063",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "09109",
+                        "nombre":  "Loncoche",
+                        "ciudadId":  "091",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "07403",
+                        "nombre":  "Longaví",
+                        "ciudadId":  "074",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "09205",
+                        "nombre":  "Lonquimay",
+                        "ciudadId":  "092",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "08206",
+                        "nombre":  "Los Álamos",
+                        "ciudadId":  "082",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "05301",
+                        "nombre":  "Los Andes",
+                        "ciudadId":  "053",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "08301",
+                        "nombre":  "Los Ángeles",
+                        "ciudadId":  "083",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "14104",
+                        "nombre":  "Los Lagos",
+                        "ciudadId":  "141",
+                        "regionId":  "14"
+                    },
+                    {
+                        "id":  "10106",
+                        "nombre":  "Los Muermos",
+                        "ciudadId":  "101",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "09206",
+                        "nombre":  "Los Sauces",
+                        "ciudadId":  "092",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "04203",
+                        "nombre":  "Los Vilos",
+                        "ciudadId":  "042",
+                        "regionId":  "04"
+                    },
+                    {
+                        "id":  "08106",
+                        "nombre":  "Lota",
+                        "ciudadId":  "081",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "09207",
+                        "nombre":  "Lumaco",
+                        "ciudadId":  "092",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "06108",
+                        "nombre":  "Machalí",
+                        "ciudadId":  "061",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "13118",
+                        "nombre":  "Macul",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "14105",
+                        "nombre":  "Máfil",
+                        "ciudadId":  "141",
+                        "regionId":  "14"
+                    },
+                    {
+                        "id":  "13119",
+                        "nombre":  "Maipú",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "06109",
+                        "nombre":  "Malloa",
+                        "ciudadId":  "061",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "06204",
+                        "nombre":  "Marchihue",
+                        "ciudadId":  "062",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "02302",
+                        "nombre":  "María Elena",
+                        "ciudadId":  "023",
+                        "regionId":  "02"
+                    },
+                    {
+                        "id":  "13504",
+                        "nombre":  "María Pinto",
+                        "ciudadId":  "135",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "14106",
+                        "nombre":  "Mariquina",
+                        "ciudadId":  "141",
+                        "regionId":  "14"
+                    },
+                    {
+                        "id":  "07105",
+                        "nombre":  "Maule",
+                        "ciudadId":  "071",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "10108",
+                        "nombre":  "Maullín",
+                        "ciudadId":  "101",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "02102",
+                        "nombre":  "Mejillones",
+                        "ciudadId":  "021",
+                        "regionId":  "02"
+                    },
+                    {
+                        "id":  "09110",
+                        "nombre":  "Melipeuco",
+                        "ciudadId":  "091",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "13501",
+                        "nombre":  "Melipilla",
+                        "ciudadId":  "135",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "07304",
+                        "nombre":  "Molina",
+                        "ciudadId":  "073",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "04303",
+                        "nombre":  "Monte Patria",
+                        "ciudadId":  "043",
+                        "regionId":  "04"
+                    },
+                    {
+                        "id":  "06110",
+                        "nombre":  "Mostazal",
+                        "ciudadId":  "061",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "08305",
+                        "nombre":  "Mulchén",
+                        "ciudadId":  "083",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "08306",
+                        "nombre":  "Nacimiento",
+                        "ciudadId":  "083",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "06305",
+                        "nombre":  "Nancagua",
+                        "ciudadId":  "063",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "12401",
+                        "nombre":  "Natales",
+                        "ciudadId":  "124",
+                        "regionId":  "12"
+                    },
+                    {
+                        "id":  "06205",
+                        "nombre":  "Navidad",
+                        "ciudadId":  "062",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "08307",
+                        "nombre":  "Negrete",
+                        "ciudadId":  "083",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "16204",
+                        "nombre":  "Ninhue",
+                        "ciudadId":  "162",
+                        "regionId":  "16"
+                    },
+                    {
+                        "id":  "05506",
+                        "nombre":  "Nogales",
+                        "ciudadId":  "055",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "09111",
+                        "nombre":  "Nueva Imperial",
+                        "ciudadId":  "091",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "16303",
+                        "nombre":  "Ñiquén",
+                        "ciudadId":  "163",
+                        "regionId":  "16"
+                    },
+                    {
+                        "id":  "13120",
+                        "nombre":  "Ñuñoa",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "11302",
+                        "nombre":  "O’Higgins",
+                        "ciudadId":  "113",
+                        "regionId":  "11"
+                    },
+                    {
+                        "id":  "06111",
+                        "nombre":  "Olivar",
+                        "ciudadId":  "061",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "02202",
+                        "nombre":  "Ollagüe",
+                        "ciudadId":  "022",
+                        "regionId":  "02"
+                    },
+                    {
+                        "id":  "05803",
+                        "nombre":  "Olmué",
+                        "ciudadId":  "058",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "10301",
+                        "nombre":  "Osorno",
+                        "ciudadId":  "103",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "04301",
+                        "nombre":  "Ovalle",
+                        "ciudadId":  "043",
+                        "regionId":  "04"
+                    },
+                    {
+                        "id":  "13604",
+                        "nombre":  "Padre Hurtado",
+                        "ciudadId":  "136",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "09112",
+                        "nombre":  "Padre las Casas",
+                        "ciudadId":  "091",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "04105",
+                        "nombre":  "Paiguano",
+                        "ciudadId":  "041",
+                        "regionId":  "04"
+                    },
+                    {
+                        "id":  "14107",
+                        "nombre":  "Paillaco",
+                        "ciudadId":  "141",
+                        "regionId":  "14"
+                    },
+                    {
+                        "id":  "13404",
+                        "nombre":  "Paine",
+                        "ciudadId":  "134",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "10404",
+                        "nombre":  "Palena",
+                        "ciudadId":  "104",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "06306",
+                        "nombre":  "Palmilla",
+                        "ciudadId":  "063",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "14108",
+                        "nombre":  "Panguipulli",
+                        "ciudadId":  "141",
+                        "regionId":  "14"
+                    },
+                    {
+                        "id":  "05704",
+                        "nombre":  "Panquehue",
+                        "ciudadId":  "057",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "05403",
+                        "nombre":  "Papudo",
+                        "ciudadId":  "054",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "06206",
+                        "nombre":  "Paredones",
+                        "ciudadId":  "062",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "07404",
+                        "nombre":  "Parral",
+                        "ciudadId":  "074",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "13121",
+                        "nombre":  "Pedro Aguirre Cerda",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "07106",
+                        "nombre":  "Pelarco",
+                        "ciudadId":  "071",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "07203",
+                        "nombre":  "Pelluhue",
+                        "ciudadId":  "072",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "16105",
+                        "nombre":  "Pemuco",
+                        "ciudadId":  "161",
+                        "regionId":  "16"
+                    },
+                    {
+                        "id":  "07107",
+                        "nombre":  "Pencahue",
+                        "ciudadId":  "071",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "08107",
+                        "nombre":  "Penco",
+                        "ciudadId":  "081",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "13605",
+                        "nombre":  "Peñaflor",
+                        "ciudadId":  "136",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "13122",
+                        "nombre":  "Peñalolén",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "06307",
+                        "nombre":  "Peralillo",
+                        "ciudadId":  "063",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "09113",
+                        "nombre":  "Perquenco",
+                        "ciudadId":  "091",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "05404",
+                        "nombre":  "Petorca",
+                        "ciudadId":  "054",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "06112",
+                        "nombre":  "Peumo",
+                        "ciudadId":  "061",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "01405",
+                        "nombre":  "Pica",
+                        "ciudadId":  "014",
+                        "regionId":  "01"
+                    },
+                    {
+                        "id":  "06113",
+                        "nombre":  "Pichidegua",
+                        "ciudadId":  "061",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "06201",
+                        "nombre":  "Pichilemu",
+                        "ciudadId":  "062",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "16106",
+                        "nombre":  "Pinto",
+                        "ciudadId":  "161",
+                        "regionId":  "16"
+                    },
+                    {
+                        "id":  "13202",
+                        "nombre":  "Pirque",
+                        "ciudadId":  "132",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "09114",
+                        "nombre":  "Pitrufquén",
+                        "ciudadId":  "091",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "06308",
+                        "nombre":  "Placilla",
+                        "ciudadId":  "063",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "16205",
+                        "nombre":  "Portezuelo",
+                        "ciudadId":  "162",
+                        "regionId":  "16"
+                    },
+                    {
+                        "id":  "12301",
+                        "nombre":  "Porvenir",
+                        "ciudadId":  "123",
+                        "regionId":  "12"
+                    },
+                    {
+                        "id":  "01401",
+                        "nombre":  "Pozo Almonte",
+                        "ciudadId":  "014",
+                        "regionId":  "01"
+                    },
+                    {
+                        "id":  "12302",
+                        "nombre":  "Primavera",
+                        "ciudadId":  "123",
+                        "regionId":  "12"
+                    },
+                    {
+                        "id":  "13123",
+                        "nombre":  "Providencia",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "05105",
+                        "nombre":  "Puchuncaví",
+                        "ciudadId":  "051",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "09115",
+                        "nombre":  "Pucón",
+                        "ciudadId":  "091",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "13124",
+                        "nombre":  "Pudahuel",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "13201",
+                        "nombre":  "Puente Alto",
+                        "ciudadId":  "132",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "10101",
+                        "nombre":  "Puerto Montt",
+                        "ciudadId":  "101",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "10302",
+                        "nombre":  "Puerto Octay",
+                        "ciudadId":  "103",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "10109",
+                        "nombre":  "Puerto Varas",
+                        "ciudadId":  "101",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "06309",
+                        "nombre":  "Pumanque",
+                        "ciudadId":  "063",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "04304",
+                        "nombre":  "Punitaqui",
+                        "ciudadId":  "043",
+                        "regionId":  "04"
+                    },
+                    {
+                        "id":  "12101",
+                        "nombre":  "Punta Arenas",
+                        "ciudadId":  "121",
+                        "regionId":  "12"
+                    },
+                    {
+                        "id":  "10206",
+                        "nombre":  "Puqueldón",
+                        "ciudadId":  "102",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "09208",
+                        "nombre":  "Purén",
+                        "ciudadId":  "092",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "10303",
+                        "nombre":  "Purranque",
+                        "ciudadId":  "103",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "05705",
+                        "nombre":  "Putaendo",
+                        "ciudadId":  "057",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "15201",
+                        "nombre":  "Putre",
+                        "ciudadId":  "152",
+                        "regionId":  "15"
+                    },
+                    {
+                        "id":  "10304",
+                        "nombre":  "Puyehue",
+                        "ciudadId":  "103",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "10207",
+                        "nombre":  "Queilén",
+                        "ciudadId":  "102",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "10208",
+                        "nombre":  "Quellón",
+                        "ciudadId":  "102",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "10209",
+                        "nombre":  "Quemchi",
+                        "ciudadId":  "102",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "08308",
+                        "nombre":  "Quilaco",
+                        "ciudadId":  "083",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "13125",
+                        "nombre":  "Quilicura",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "08309",
+                        "nombre":  "Quilleco",
+                        "ciudadId":  "083",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "16107",
+                        "nombre":  "Quillón",
+                        "ciudadId":  "161",
+                        "regionId":  "16"
+                    },
+                    {
+                        "id":  "05501",
+                        "nombre":  "Quillota",
+                        "ciudadId":  "055",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "05801",
+                        "nombre":  "Quilpué",
+                        "ciudadId":  "058",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "10210",
+                        "nombre":  "Quinchao",
+                        "ciudadId":  "102",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "06114",
+                        "nombre":  "Quinta de Tilcoco",
+                        "ciudadId":  "061",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "13126",
+                        "nombre":  "Quinta Normal",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "05107",
+                        "nombre":  "Quintero",
+                        "ciudadId":  "051",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "16201",
+                        "nombre":  "Quirihue",
+                        "ciudadId":  "162",
+                        "regionId":  "16"
+                    },
+                    {
+                        "id":  "06101",
+                        "nombre":  "Rancagua",
+                        "ciudadId":  "061",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "16206",
+                        "nombre":  "Ránquil",
+                        "ciudadId":  "162",
+                        "regionId":  "16"
+                    },
+                    {
+                        "id":  "07305",
+                        "nombre":  "Rauco",
+                        "ciudadId":  "073",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "13127",
+                        "nombre":  "Recoleta",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "09209",
+                        "nombre":  "Renaico",
+                        "ciudadId":  "092",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "13128",
+                        "nombre":  "Renca",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "06115",
+                        "nombre":  "Rengo",
+                        "ciudadId":  "061",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "06116",
+                        "nombre":  "Requínoa",
+                        "ciudadId":  "061",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "07405",
+                        "nombre":  "Retiro",
+                        "ciudadId":  "074",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "05303",
+                        "nombre":  "Rinconada",
+                        "ciudadId":  "053",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "14204",
+                        "nombre":  "Río Bueno",
+                        "ciudadId":  "142",
+                        "regionId":  "14"
+                    },
+                    {
+                        "id":  "07108",
+                        "nombre":  "Río Claro",
+                        "ciudadId":  "071",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "04305",
+                        "nombre":  "Río Hurtado",
+                        "ciudadId":  "043",
+                        "regionId":  "04"
+                    },
+                    {
+                        "id":  "11402",
+                        "nombre":  "Río Ibáñez",
+                        "ciudadId":  "114",
+                        "regionId":  "11"
+                    },
+                    {
+                        "id":  "10305",
+                        "nombre":  "Río Negro",
+                        "ciudadId":  "103",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "12103",
+                        "nombre":  "Río Verde",
+                        "ciudadId":  "121",
+                        "regionId":  "12"
+                    },
+                    {
+                        "id":  "07306",
+                        "nombre":  "Romeral",
+                        "ciudadId":  "073",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "09116",
+                        "nombre":  "Saavedra",
+                        "ciudadId":  "091",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "07307",
+                        "nombre":  "Sagrada Familia",
+                        "ciudadId":  "073",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "04204",
+                        "nombre":  "Salamanca",
+                        "ciudadId":  "042",
+                        "regionId":  "04"
+                    },
+                    {
+                        "id":  "05601",
+                        "nombre":  "San Antonio",
+                        "ciudadId":  "056",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "13401",
+                        "nombre":  "San Bernardo",
+                        "ciudadId":  "134",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "16301",
+                        "nombre":  "San Carlos",
+                        "ciudadId":  "163",
+                        "regionId":  "16"
+                    },
+                    {
+                        "id":  "07109",
+                        "nombre":  "San Clemente",
+                        "ciudadId":  "071",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "05304",
+                        "nombre":  "San Esteban",
+                        "ciudadId":  "053",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "16304",
+                        "nombre":  "San Fabián",
+                        "ciudadId":  "163",
+                        "regionId":  "16"
+                    },
+                    {
+                        "id":  "05701",
+                        "nombre":  "San Felipe",
+                        "ciudadId":  "057",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "06301",
+                        "nombre":  "San Fernando",
+                        "ciudadId":  "063",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "12104",
+                        "nombre":  "San Gregorio",
+                        "ciudadId":  "121",
+                        "regionId":  "12"
+                    },
+                    {
+                        "id":  "16108",
+                        "nombre":  "San Ignacio",
+                        "ciudadId":  "161",
+                        "regionId":  "16"
+                    },
+                    {
+                        "id":  "07406",
+                        "nombre":  "San Javier",
+                        "ciudadId":  "074",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "13129",
+                        "nombre":  "San Joaquín",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "13203",
+                        "nombre":  "San José de Maipo",
+                        "ciudadId":  "132",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "10306",
+                        "nombre":  "San Juan de la Costa",
+                        "ciudadId":  "103",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "13130",
+                        "nombre":  "San Miguel",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "16305",
+                        "nombre":  "San Nicolás",
+                        "ciudadId":  "163",
+                        "regionId":  "16"
+                    },
+                    {
+                        "id":  "10307",
+                        "nombre":  "San Pablo",
+                        "ciudadId":  "103",
+                        "regionId":  "10"
+                    },
+                    {
+                        "id":  "13505",
+                        "nombre":  "San Pedro",
+                        "ciudadId":  "135",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "02203",
+                        "nombre":  "San Pedro de Atacama",
+                        "ciudadId":  "022",
+                        "regionId":  "02"
+                    },
+                    {
+                        "id":  "08108",
+                        "nombre":  "San Pedro de la Paz",
+                        "ciudadId":  "081",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "07110",
+                        "nombre":  "San Rafael",
+                        "ciudadId":  "071",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "13131",
+                        "nombre":  "San Ramón",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "08310",
+                        "nombre":  "San Rosendo",
+                        "ciudadId":  "083",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "06117",
+                        "nombre":  "San Vicente",
+                        "ciudadId":  "061",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "08311",
+                        "nombre":  "Santa Bárbara",
+                        "ciudadId":  "083",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "06310",
+                        "nombre":  "Santa Cruz",
+                        "ciudadId":  "063",
+                        "regionId":  "06"
+                    },
+                    {
+                        "id":  "08109",
+                        "nombre":  "Santa Juana",
+                        "ciudadId":  "081",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "05706",
+                        "nombre":  "Santa María",
+                        "ciudadId":  "057",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "13101",
+                        "nombre":  "Santiago Centro",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "05606",
+                        "nombre":  "Santo Domingo",
+                        "ciudadId":  "056",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "02103",
+                        "nombre":  "Sierra Gorda",
+                        "ciudadId":  "021",
+                        "regionId":  "02"
+                    },
+                    {
+                        "id":  "13601",
+                        "nombre":  "Talagante",
+                        "ciudadId":  "136",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "07101",
+                        "nombre":  "Talca",
+                        "ciudadId":  "071",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "08110",
+                        "nombre":  "Talcahuano",
+                        "ciudadId":  "081",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "02104",
+                        "nombre":  "Taltal",
+                        "ciudadId":  "021",
+                        "regionId":  "02"
+                    },
+                    {
+                        "id":  "09101",
+                        "nombre":  "Temuco",
+                        "ciudadId":  "091",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "07308",
+                        "nombre":  "Teno",
+                        "ciudadId":  "073",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "09117",
+                        "nombre":  "Teodoro Schmidt",
+                        "ciudadId":  "091",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "03103",
+                        "nombre":  "Tierra Amarilla",
+                        "ciudadId":  "031",
+                        "regionId":  "03"
+                    },
+                    {
+                        "id":  "13303",
+                        "nombre":  "Tiltil",
+                        "ciudadId":  "133",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "12303",
+                        "nombre":  "Timaukel",
+                        "ciudadId":  "123",
+                        "regionId":  "12"
+                    },
+                    {
+                        "id":  "08207",
+                        "nombre":  "Tirúa",
+                        "ciudadId":  "082",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "02301",
+                        "nombre":  "Tocopilla",
+                        "ciudadId":  "023",
+                        "regionId":  "02"
+                    },
+                    {
+                        "id":  "09118",
+                        "nombre":  "Toltén",
+                        "ciudadId":  "091",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "08111",
+                        "nombre":  "Tomé",
+                        "ciudadId":  "081",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "12402",
+                        "nombre":  "Torres del Paine",
+                        "ciudadId":  "124",
+                        "regionId":  "12"
+                    },
+                    {
+                        "id":  "11303",
+                        "nombre":  "Tortel",
+                        "ciudadId":  "113",
+                        "regionId":  "11"
+                    },
+                    {
+                        "id":  "09210",
+                        "nombre":  "Traiguén",
+                        "ciudadId":  "092",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "16207",
+                        "nombre":  "Treguaco",
+                        "ciudadId":  "162",
+                        "regionId":  "16"
+                    },
+                    {
+                        "id":  "08312",
+                        "nombre":  "Tucapel",
+                        "ciudadId":  "083",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "14101",
+                        "nombre":  "Valdivia",
+                        "ciudadId":  "141",
+                        "regionId":  "14"
+                    },
+                    {
+                        "id":  "03301",
+                        "nombre":  "Vallenar",
+                        "ciudadId":  "033",
+                        "regionId":  "03"
+                    },
+                    {
+                        "id":  "05101",
+                        "nombre":  "Valparaíso",
+                        "ciudadId":  "051",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "07309",
+                        "nombre":  "Vichuquén",
+                        "ciudadId":  "073",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "09211",
+                        "nombre":  "Victoria",
+                        "ciudadId":  "092",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "04106",
+                        "nombre":  "Vicuña",
+                        "ciudadId":  "041",
+                        "regionId":  "04"
+                    },
+                    {
+                        "id":  "09119",
+                        "nombre":  "Vilcún",
+                        "ciudadId":  "091",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "07407",
+                        "nombre":  "Villa Alegre",
+                        "ciudadId":  "074",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "05804",
+                        "nombre":  "Villa Alemana",
+                        "ciudadId":  "058",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "09120",
+                        "nombre":  "Villarrica",
+                        "ciudadId":  "091",
+                        "regionId":  "09"
+                    },
+                    {
+                        "id":  "05109",
+                        "nombre":  "Viña del Mar",
+                        "ciudadId":  "051",
+                        "regionId":  "05"
+                    },
+                    {
+                        "id":  "13132",
+                        "nombre":  "Vitacura",
+                        "ciudadId":  "131",
+                        "regionId":  "13"
+                    },
+                    {
+                        "id":  "07408",
+                        "nombre":  "Yerbas Buenas",
+                        "ciudadId":  "074",
+                        "regionId":  "07"
+                    },
+                    {
+                        "id":  "08313",
+                        "nombre":  "Yumbel",
+                        "ciudadId":  "083",
+                        "regionId":  "08"
+                    },
+                    {
+                        "id":  "16109",
+                        "nombre":  "Yungay",
+                        "ciudadId":  "161",
+                        "regionId":  "16"
+                    },
+                    {
+                        "id":  "05405",
+                        "nombre":  "Zapallar",
+                        "ciudadId":  "054",
+                        "regionId":  "05"
+                    }
+                ]
+}
