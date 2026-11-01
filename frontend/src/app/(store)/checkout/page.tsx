@@ -5,10 +5,17 @@ import { Input } from '@/components/ui/input';
 import { Minus, Plus, Trash2, Tag, X, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useCheckoutFlowStore } from '@/store/checkoutFlowStore';
 
 export default function CartReviewStep() {
     const { items, updateQuantity, removeItem, applyDiscount, removeDiscount, discount } = useCartStore();
+    const setOrderCompleted = useCheckoutFlowStore((s) => s.setOrderCompleted);
+
+    // Nueva compra: permitir que el layout vuelva a validar el carrito
+    useEffect(() => {
+        if (items.length > 0) setOrderCompleted(false);
+    }, [items.length, setOrderCompleted]);
     const [couponCode, setCouponCode] = useState('');
     const [couponError, setCouponError] = useState('');
     const [applying, setApplying] = useState(false);

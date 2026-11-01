@@ -2,6 +2,7 @@
 import { useAuthStore } from '@/store/authStore';
 import { useCartStore } from '@/store/cartStore';
 import { useCheckoutStore } from '@/store/checkoutStore';
+import { useCheckoutFlowStore } from '@/store/checkoutFlowStore';
 import { useCheckoutDraft } from '@/hooks/useCheckoutDraft';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -21,6 +22,7 @@ export default function CheckoutLayout({ children }: { children: React.ReactNode
     const { user, isLoading } = useAuthStore();
     const { items, total, subtotal, discount, isHydrated } = useCartStore();
     const { shippingCost, shippingInfo } = useCheckoutStore();
+    const orderCompleted = useCheckoutFlowStore((s) => s.orderCompleted);
     const pathname = usePathname();
     const router = useRouter();
 
@@ -28,6 +30,8 @@ export default function CheckoutLayout({ children }: { children: React.ReactNode
 
     useEffect(() => {
         if (!isHydrated) return;
+        // No redirigir mientras se muestra la confirmación del pedido
+        if (orderCompleted) return;
         if (items.length === 0 && pathname !== '/checkout') {
             router.replace('/checkout');
             return;
@@ -37,7 +41,7 @@ export default function CheckoutLayout({ children }: { children: React.ReactNode
                 router.replace('/checkout/shipping');
             }
         }
-    }, [pathname, items.length, shippingInfo, isHydrated, router]);
+    }, [pathname, items.length, shippingInfo, isHydrated, router, orderCompleted]);
 
     const currentStepIndex = STEPS.findIndex((s) => pathname === s.path || pathname.startsWith(s.path + '?'));
     const activeStep = currentStepIndex >= 0 ? currentStepIndex : 0;
@@ -51,7 +55,7 @@ export default function CheckoutLayout({ children }: { children: React.ReactNode
         return <div className="min-h-screen flex items-center justify-center">Cargando...</div>;
     }
 
-    if (items.length === 0 && activeStep < 3) {
+    if (items.length === 0 && activeStep < 3 && !orderCompleted) {
         return (
             <div className="max-w-4xl mx-auto px-4 py-12 text-center">
                 <ShoppingCart className="w-16 h-16 mx-auto text-gray-300 mb-4" />

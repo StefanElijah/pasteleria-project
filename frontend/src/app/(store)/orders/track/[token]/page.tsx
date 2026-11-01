@@ -5,7 +5,9 @@ import api from '@/lib/axios';
 import { Order } from '@/types';
 import { useOrderStatus } from '@/hooks/useOrderStatus';
 import { OrderStatusBadge } from '@/components/admin/OrderStatusBadge';
-import { Loader2, Package } from 'lucide-react';
+import { Loader2, Package, X } from 'lucide-react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function TrackOrderPage() {
     const { token } = useParams();
@@ -13,6 +15,7 @@ export default function TrackOrderPage() {
     const [order, setOrder] = useState<Order | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [showInvite, setShowInvite] = useState(true);
 
     useEffect(() => {
         if (token && typeof token === 'string') {
@@ -57,6 +60,25 @@ export default function TrackOrderPage() {
                     </div>
                 </div>
             </div>
+
+            {showInvite && (
+                <div className="relative bg-rose-50 border border-rose-200 rounded-lg p-4 mb-4">
+                    <button
+                        onClick={() => setShowInvite(false)}
+                        className="absolute top-2 right-2 text-rose-400 hover:text-rose-600"
+                        aria-label="Cerrar"
+                    >
+                        <X className="w-4 h-4" />
+                    </button>
+                    <p className="font-semibold text-rose-900 mb-1">Crea tu cuenta y gana beneficios</p>
+                    <p className="text-sm text-rose-800 mb-2">
+                        500 puntos de bienvenida, cupón de 10% y el historial de tus pedidos en un solo lugar.
+                    </p>
+                    <Link href={`/auth/register?email=${encodeURIComponent(order.emailDestinatario)}`}>
+                        <Button size="sm" className="bg-rose-600 hover:bg-rose-700">Registrarse</Button>
+                    </Link>
+                </div>
+            )}
 
             <div className="border rounded-lg p-4 space-y-4">
                 <div>

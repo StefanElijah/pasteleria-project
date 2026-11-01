@@ -1,5 +1,6 @@
 'use client';
 import { useCheckoutStore } from '@/store/checkoutStore';
+import { useCheckoutFlowStore } from '@/store/checkoutFlowStore';
 import { useCartStore } from '@/store/cartStore';
 import { useAuthStore } from '@/store/authStore';
 import { Button } from '@/components/ui/button';
@@ -11,7 +12,11 @@ import api from '@/lib/axios';
 import { deleteDraft } from '@/lib/checkout';
 
 export default function ReviewStep() {
-    const { shippingInfo, paymentMethod, shippingMethod, setShippingCost, shippingCost, reset: resetCheckout } = useCheckoutStore();
+    const {
+        shippingInfo, paymentMethod, shippingMethod, setShippingCost, shippingCost,
+        reset: resetCheckout, saveAddress, selectedAddressId, puntosUsados, setPuntosUsados,
+    } = useCheckoutStore();
+    const setOrderCompleted = useCheckoutFlowStore((s) => s.setOrderCompleted);
     const { items, total, subtotal, discount, clearCart } = useCartStore();
     const { user } = useAuthStore();
     const router = useRouter();
@@ -21,11 +26,21 @@ export default function ReviewStep() {
     const [orderCreated, setOrderCreated] = useState<any>(null);
     const [calculatingShipping, setCalculatingShipping] = useState(true);
     const [copied, setCopied] = useState(false);
+    const [puntosSaldo, setPuntosSaldo] = useState(0);
 
     const displaySubtotal = subtotal || total;
     const displayDiscount = discount?.amount || 0;
     const displayShipping = shippingCost || 0;
-    const displayTotal = total + displayShipping;
+    const maxPuntos = Math.min(puntosSaldo, Math.floor(displaySubtotal * 0.5));
+    const envioGratis = discount?.tipo === 'ENVIO_GRATIS';
+    const displayTotal = total + displayShipping - puntosUsados;
+
+    useEffect(() => {
+        if (!user) return;
+        api.get('/users/puntos')
+            .then(({ data }) => setPuntosSaldo(data.saldo || 0))
+            .catch(() => { });
+    }, [user]);
 
     useEffect(() => {
         if (shippingInfo.comunaId) {
@@ -52,13 +67,18 @@ export default function ReviewStep() {
                 direccion: {
                     calle: shippingInfo.calle,
                     numero: shippingInfo.numero,
+                    regionId: shippingInfo.regionId,
+                    ciudadId: shippingInfo.ciudadId,
                     comunaId: shippingInfo.comunaId,
                     tipoVivienda: shippingInfo.tipoVivienda || 'CASA',
                 },
                 metodoPago: paymentMethod,
                 metodoEnvio: shippingMethod,
-                costoEnvio: shippingCost,
+                costoEnvio: envioGratis ? 0 : shippingCost,
                 descuentoId: discount?.id,
+                puntosUsados: puntosUsados || undefined,
+                guardarDireccion: saveAddress || undefined,
+                direccionGuardadaId: selectedAddressId || undefined,
                 primerNombreDestinatario: shippingInfo.primerNombreDestinatario,
                 primerApellidoDestinatario: shippingInfo.primerApellidoDestinatario,
                 emailDestinatario: shippingInfo.emailDestinatario,
@@ -66,10 +86,18 @@ export default function ReviewStep() {
             };
 
             const response = await api.post('/orders', orderData);
-            await clearCart();
-            await deleteDraft().catch(() => { });
-            resetCheckout();
+            // Marcar completado ANTES de vaciar el carrito para que el layout
+            // no redirija y la pantalla de confirmación permanezca visible.
+            setOrderCompleted(true);
             setOrderCreated(response.data);
+            await clearCart();
+            // Solo los usuarios con sesión tienen borrador en el servidor.
+            // Para invitados, /checkout/draft responde 401 y el interceptor
+            // de axios redirige a /auth/login (rompía la confirmación).
+            if (user) {
+                await deleteDraft().catch(() => { });
+            }
+            resetCheckout();
         } catch (err: any) {
             setError(err.response?.data?.message || 'Error al procesar el pedido. Intenta de nuevo.');
         } finally {
@@ -87,6 +115,7 @@ export default function ReviewStep() {
 
     if (orderCreated) {
         const isGuest = !user;
+        const guestEmail = orderCreated.emailDestinatario || shippingInfo.emailDestinatario;
         const trackingUrl = orderCreated.trackingToken
             ? `${typeof window !== 'undefined' ? window.location.origin : ''}/orders/track/${orderCreated.trackingToken}`
             : null;
@@ -129,13 +158,39 @@ export default function ReviewStep() {
                             </Button>
                         </div>
                         <p className="text-xs text-blue-700 mt-2">
-                            También te lo enviaremos por email a {shippingInfo.emailDestinatario}.
+                            También te lo enviaremos por email a {guestEmail}.
                         </p>
                     </div>
                 )}
 
+                {isGuest && (
+                    <div className="bg-rose-50 border border-rose-200 rounded-lg p-5 mb-6 max-w-md mx-auto text-left">
+                        <p className="font-semibold text-rose-900 mb-2">¡Crea tu cuenta y gana beneficios!</p>
+                        <ul className="text-sm text-rose-800 space-y-1 mb-3 list-disc pl-4">
+                            <li><strong>500 puntos de bienvenida</strong> (equivalen a $500)</li>
+                            <li>Cupón de <strong>10% de descuento</strong> en tu próxima compra</li>
+                            <li>Acumula puntos en cada compra y súbelos a descuentos</li>
+                            <li>Sigue el historial de todos tus pedidos</li>
+                        </ul>
+                        <p className="text-xs text-rose-700 mb-3">
+                            Regístrate con <strong>{guestEmail}</strong> y tus compras anteriores aparecerán en tu cuenta.
+                        </p>
+                        <div className="flex gap-2">
+                            <Button
+                                className="bg-rose-600 hover:bg-rose-700"
+                                onClick={() => router.push(`/auth/register?email=${encodeURIComponent(guestEmail)}`)}
+                            >
+                                Registrarse
+                            </Button>
+                            <Button variant="outline" onClick={() => router.push('/auth/login')}>
+                                Ya tengo cuenta
+                            </Button>
+                        </div>
+                    </div>
+                )}
+
                 <div className="flex gap-4 justify-center flex-wrap">
-                    <Button variant="outline" onClick={() => router.push('/')}>
+                    <Button variant="outline" onClick={() => { setOrderCompleted(false); router.push('/'); }}>
                         Seguir comprando
                     </Button>
                     {!isGuest && (
@@ -144,6 +199,16 @@ export default function ReviewStep() {
                         </Button>
                     )}
                 </div>
+            </div>
+        );
+    }
+
+    if (items.length === 0) {
+        return (
+            <div className="text-center py-12">
+                <h2 className="text-xl font-bold mb-2">No hay un pedido para confirmar</h2>
+                <p className="text-gray-500 mb-6">Tu carrito está vacío.</p>
+                <Button onClick={() => router.push('/')}>Ir a comprar</Button>
             </div>
         );
     }
@@ -163,7 +228,10 @@ export default function ReviewStep() {
                             {shippingInfo.primerNombreDestinatario} {shippingInfo.primerApellidoDestinatario}
                         </p>
                         <p>
-                            {shippingInfo.calle} #{shippingInfo.numero}, Comuna {shippingInfo.comunaId}
+                            {shippingInfo.calle} #{shippingInfo.numero},{' '}
+                            {[shippingInfo.comunaNombre, shippingInfo.ciudadNombre, shippingInfo.regionNombre]
+                                .filter(Boolean)
+                                .join(', ')}
                         </p>
                         <p>
                             {shippingInfo.emailDestinatario} · {shippingInfo.telefonoDestinatario}
@@ -200,6 +268,34 @@ export default function ReviewStep() {
                     </p>
                 </div>
 
+                {user && puntosSaldo >= 500 && (
+                    <div className="border rounded-lg p-4">
+                        <h3 className="font-semibold mb-2">Usar mis puntos</h3>
+                        <p className="text-sm text-gray-500 mb-2">
+                            Saldo: {puntosSaldo.toLocaleString()} pts · máximo aplicable: {maxPuntos.toLocaleString()} pts (50% del subtotal)
+                        </p>
+                        <div className="flex items-center gap-2">
+                            <Input
+                                type="number"
+                                min={0}
+                                max={maxPuntos}
+                                value={puntosUsados}
+                                onChange={(e) => {
+                                    const v = Math.max(0, Math.min(maxPuntos, parseInt(e.target.value || '0', 10)));
+                                    setPuntosUsados(v);
+                                }}
+                                className="w-40"
+                            />
+                            <Button type="button" variant="outline" size="sm" onClick={() => setPuntosUsados(maxPuntos)}>
+                                Usar máximo
+                            </Button>
+                            <Button type="button" variant="ghost" size="sm" onClick={() => setPuntosUsados(0)}>
+                                Quitar
+                            </Button>
+                        </div>
+                    </div>
+                )}
+
                 <div className="border-t pt-4 space-y-2">
                     <div className="flex justify-between text-gray-600">
                         <span>Subtotal</span>
@@ -211,13 +307,19 @@ export default function ReviewStep() {
                             <span>-${displayDiscount.toLocaleString()}</span>
                         </div>
                     )}
+                    {puntosUsados > 0 && (
+                        <div className="flex justify-between text-green-600">
+                            <span>Puntos usados</span>
+                            <span>-${puntosUsados.toLocaleString()}</span>
+                        </div>
+                    )}
                     <div className="flex justify-between text-gray-600">
                         <span>Envío</span>
-                        <span>{calculatingShipping ? '...' : `$${displayShipping.toLocaleString()}`}</span>
+                        <span>{calculatingShipping ? '...' : envioGratis ? 'Gratis' : `$${displayShipping.toLocaleString()}`}</span>
                     </div>
                     <div className="flex justify-between font-bold text-xl border-t pt-2">
                         <span>Total</span>
-                        <span>{calculatingShipping ? '...' : `$${displayTotal.toLocaleString()}`}</span>
+                        <span>{calculatingShipping ? '...' : `$${Math.max(0, displayTotal).toLocaleString()}`}</span>
                     </div>
                 </div>
 
