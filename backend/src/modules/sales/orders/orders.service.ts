@@ -2,6 +2,8 @@ import { Injectable, Inject, BadRequestException, NotFoundException, ForbiddenEx
 import { CreateOrderDto } from './dto/create-order.dto';
 import { EstadoPedido } from '@prisma/client';
 import { CartService } from '@modules/sales/cart/cart.service';
+import { LoyaltyService } from '@modules/loyalty/loyalty.service';
+import { toTitleCase } from '@/lib/normalize-name';
 
 const TRANSICIONES: Record<EstadoPedido, EstadoPedido[]> = {
     PENDIENTE: ['PREPARANDO', 'CANCELADO'],
@@ -20,6 +22,7 @@ export class OrdersService {
     constructor(
         @Inject('PrismaClient') private prisma: any,
         private cartService: CartService,
+        private loyalty: LoyaltyService,
     ) { }
 
     async calculateShipping(comunaId: string, metodoEnvio: string): Promise<{ costo: number; fechaEstimada: Date }> {
@@ -31,7 +34,7 @@ export class OrdersService {
 
         let costo = 0;
         let dias = 3;
-        if (comuna.region.nombre === 'Metropolitana') {
+        if (comuna.region.id === '13' || comuna.region.nombre.includes('Metropolitana')) {
             if (metodoEnvio === 'Chilexpress') costo = 3000;
             if (metodoEnvio === 'Starken') costo = 2500;
             dias = 1;
@@ -67,7 +70,13 @@ export class OrdersService {
             transaccionId,
             comprobantePago,
             plataforma,
+            guardarDireccion,
+            direccionGuardadaId,
         } = createOrderDto;
+
+        // Normalización de nombres del destinatario
+        const nombreDestinatario = toTitleCase(primerNombreDestinatario) as string;
+        const apellidoDestinatario = toTitleCase(primerApellidoDestinatario) as string;
 
         // 1. Determinar los items del pedido (desde el DTO o desde el carrito)
         let finalItems: Array<{ productId: string; quantity: number }> = [];
@@ -91,7 +100,7 @@ export class OrdersService {
         if (direccionId) {
             direccionFinal = await this.prisma.direccion.findUnique({
                 where: { id: direccionId },
-                include: { comuna: true },
+                include: { comuna: true, ciudad: true },
             });
             if (!direccionFinal) throw new NotFoundException('Dirección no encontrada');
             if (userId && direccionFinal.usuarioId !== userId) {
@@ -99,17 +108,45 @@ export class OrdersService {
             }
         } else if (direccion) {
             const { comunaId, ...dirData } = direccion;
+            if (dirData.calle) dirData.calle = toTitleCase(dirData.calle) as string;
             const comuna = await this.prisma.comuna.findUnique({ where: { id: comunaId } });
             if (!comuna) throw new NotFoundException('Comuna no encontrada');
 
+            // Snapshot inmutable del pedido: SIEMPRE usuarioId = null
+            // (así no contamina la libreta de direcciones del usuario)
             direccionFinal = await this.prisma.direccion.create({
                 data: {
                     ...dirData,
                     comunaId,
-                    usuarioId: userId || null,
+                    usuarioId: null,
                 },
-                include: { comuna: true },
+                include: { comuna: true, ciudad: true },
             });
+
+            // Guardar/actualizar en la libreta del usuario si lo pidió
+            if (guardarDireccion && userId) {
+                const datosLibreta: any = { ...dirData, comunaId };
+                delete datosLibreta.isDefault;
+                if (direccionGuardadaId) {
+                    const existente = await this.prisma.direccion.findFirst({
+                        where: { id: direccionGuardadaId, usuarioId: userId },
+                    });
+                    if (existente) {
+                        await this.prisma.direccion.update({
+                            where: { id: direccionGuardadaId },
+                            data: datosLibreta,
+                        });
+                    } else {
+                        await this.prisma.direccion.create({
+                            data: { ...datosLibreta, usuarioId: userId },
+                        });
+                    }
+                } else {
+                    await this.prisma.direccion.create({
+                        data: { ...datosLibreta, usuarioId: userId },
+                    });
+                }
+            }
         } else {
             throw new BadRequestException('Debe proporcionar direccionId o direccion temporal');
         }
@@ -149,18 +186,47 @@ export class OrdersService {
             });
         }
 
-        // 5. Aplicar descuento
+        // 5. Aplicar descuento (respetando objetivo, dueño del cupón y envío gratis)
         let discountAmount = 0;
         let descuentoValidoId: string | null = null;
+        let envioGratis = false;
         if (descuentoId) {
             const descuento = await this.prisma.descuento.findUnique({
                 where: { id: descuentoId, activo: true },
+                include: { productos: true, categorias: true },
             });
-            if (descuento && (!descuento.fechaFin || descuento.fechaFin >= new Date())) {
+            const vigente = descuento && (!descuento.fechaFin || descuento.fechaFin >= new Date());
+            const autorizado = descuento && (!descuento.usuarioId || descuento.usuarioId === userId);
+            if (vigente && autorizado) {
+                let aplicable = subtotal;
+                if (descuento.objetivo === 'PRODUCTOS_ESPECIFICOS') {
+                    const ids = new Set(descuento.productos.map((p: any) => p.id));
+                    aplicable = orderItemsData
+                        .filter((i) => ids.has(i.productoId))
+                        .reduce((s, i) => s + i.total, 0);
+                } else if (descuento.objetivo === 'CATEGORIAS_ESPECIFICAS') {
+                    const prodIds = new Set(descuento.productos.map((p: any) => p.id));
+                    const catIds = new Set(descuento.categorias.map((c: any) => c.id));
+                    const prods = await this.prisma.producto.findMany({
+                        where: { id: { in: orderItemsData.map((i) => i.productoId) } },
+                        select: { id: true, categoriaId: true },
+                    });
+                    const elegibles = new Set(
+                        prods
+                            .filter((p) => catIds.has(p.categoriaId) || prodIds.has(p.id))
+                            .map((p) => p.id),
+                    );
+                    aplicable = orderItemsData
+                        .filter((i) => elegibles.has(i.productoId))
+                        .reduce((s, i) => s + i.total, 0);
+                }
+
                 if (descuento.tipo === 'PORCENTAJE') {
-                    discountAmount = Math.round((subtotal * descuento.valor) / 100);
+                    discountAmount = Math.round((aplicable * descuento.valor) / 100);
                 } else if (descuento.tipo === 'MONTO_FIJO') {
-                    discountAmount = Math.min(descuento.valor, subtotal);
+                    discountAmount = Math.min(descuento.valor, aplicable);
+                } else if (descuento.tipo === 'ENVIO_GRATIS') {
+                    envioGratis = true;
                 }
                 descuentoValidoId = descuentoId;
                 await this.prisma.descuento.update({
@@ -170,7 +236,16 @@ export class OrdersService {
             }
         }
 
-        const total = subtotal + envioCosto - discountAmount;
+        if (envioGratis) envioCosto = 0;
+
+        // 6. Canje de puntos (1 punto = $1, con validación de tope)
+        let puntosUsados = 0;
+        const puntosSolicitados = createOrderDto.puntosUsados || 0;
+        if (puntosSolicitados > 0 && userId) {
+            puntosUsados = await this.loyalty.canjearPuntos(userId, puntosSolicitados, subtotal);
+        }
+
+        const total = Math.max(0, subtotal - discountAmount - puntosUsados) + envioCosto;
         const orderNumber = `ORD-${Date.now()}`;
         // Generar trackingToken solo si es un pedido de invitado (sin userId)
         const trackingToken = userId ? null : require('crypto').randomUUID();
@@ -189,17 +264,18 @@ export class OrdersService {
                     usuarioId: userId,
                     direccionId: direccionFinal.id,
                     descuentoId: descuentoValidoId,
-                    primerNombreDestinatario,
-                    primerApellidoDestinatario,
+                    primerNombreDestinatario: nombreDestinatario,
+                    primerApellidoDestinatario: apellidoDestinatario,
                     emailDestinatario,
                     telefonoDestinatario,
                     transaccionId,
                     comprobantePago,
                     trackingToken,
                     plataforma: plataforma || null,
+                    puntosUsados,
                     items: { create: orderItemsData },
                 },
-                include: { items: true, direccion: true },
+                include: { items: true, direccion: { include: { comuna: { include: { region: true } }, ciudad: true } } },
             });
 
             const envio = await tx.envio.create({
@@ -231,6 +307,27 @@ export class OrdersService {
                 });
             }
 
+            // Descontar puntos canjeados (atomic, mismo tx)
+            if (puntosUsados > 0 && userId) {
+                const perfil = await tx.perfilCliente.findUnique({ where: { usuarioId: userId } });
+                const nuevoSaldo = (perfil?.puntos || 0) - puntosUsados;
+                await tx.perfilCliente.upsert({
+                    where: { usuarioId: userId },
+                    update: { puntos: nuevoSaldo },
+                    create: { usuarioId: userId, puntos: nuevoSaldo },
+                });
+                await tx.movimientoPuntos.create({
+                    data: {
+                        usuarioId: userId,
+                        pedidoId: newOrder.id,
+                        tipo: 'CANJE',
+                        puntos: -puntosUsados,
+                        saldoDespues: nuevoSaldo,
+                        descripcion: `Canje de puntos en pedido ${orderNumber}`,
+                    },
+                });
+            }
+
             // Vaciar carrito
             if (cartId) {
                 await this.cartService.clearCart(cartId);
@@ -248,7 +345,7 @@ export class OrdersService {
             where,
             include: {
                 items: { include: { producto: true } },
-                direccion: { include: { comuna: { include: { region: true } } } },
+                direccion: { include: { comuna: { include: { region: true } }, ciudad: true } },
                 envio: true,
             },
             orderBy: { createdAt: 'desc' },
@@ -265,7 +362,7 @@ export class OrdersService {
             where: { id },
             include: {
                 items: { include: { producto: true } },
-                direccion: { include: { comuna: { include: { region: true } } } },
+                direccion: { include: { comuna: { include: { region: true } }, ciudad: true } },
                 envio: true,
             },
         });
@@ -279,7 +376,7 @@ export class OrdersService {
             where: { numeroPedido },
             include: {
                 items: { include: { producto: true } },
-                direccion: { include: { comuna: { include: { region: true } } } },
+                direccion: { include: { comuna: { include: { region: true } }, ciudad: true } },
                 envio: true,
             },
         });
@@ -293,7 +390,7 @@ export class OrdersService {
             where: { trackingToken: token },
             include: {
                 items: { include: { producto: true } },
-                direccion: { include: { comuna: { include: { region: true } } } },
+                direccion: { include: { comuna: { include: { region: true } }, ciudad: true } },
                 envio: true,
             },
         });
@@ -317,11 +414,35 @@ export class OrdersService {
             );
         }
 
-        return this.prisma.pedido.update({
+        const updated = await this.prisma.pedido.update({
             where: { id },
             data: { estado },
             include: { envio: true },
         });
+
+        // Efectos de fidelidad según el nuevo estado
+        try {
+            if (estado === 'ENTREGADO') {
+                await this.loyalty.otorgarPuntos(id);
+            } else if (estado === 'CANCELADO' || estado === 'DEVUELTO') {
+                // Revertir puntos ganados (si estaban otorgados)
+                await this.loyalty.revertirPuntos(id, order.subtotal, order.subtotal);
+                // Devolver puntos usados en la compra
+                if (order.puntosUsados > 0 && order.usuarioId) {
+                    await this.loyalty.reintegrarPuntos(
+                        order.usuarioId,
+                        order.puntosUsados,
+                        `Devolución de puntos por pedido ${order.numeroPedido} (${estado})`,
+                        order.id,
+                    );
+                    await this.prisma.pedido.update({ where: { id }, data: { puntosUsados: 0 } });
+                }
+            }
+        } catch {
+            // No bloquear el cambio de estado si falla la lógica de fidelidad
+        }
+
+        return updated;
     }
 
     getStatusInfo() {

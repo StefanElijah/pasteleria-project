@@ -85,6 +85,10 @@ export class CartService {
             include: { productos: true, categorias: true },
         });
         if (!descuento) throw new NotFoundException('Cupón no válido o expirado');
+        // Cupón personal: solo su dueño puede usarlo
+        if (descuento.usuarioId && descuento.usuarioId !== userId) {
+            throw new BadRequestException('Este cupón no está disponible para tu cuenta');
+        }
         if (descuento.fechaFin && descuento.fechaFin < new Date()) throw new BadRequestException('El cupón ha expirado');
         if (descuento.valorMinimoPedido && cart.total < descuento.valorMinimoPedido) {
             throw new BadRequestException(`El pedido mínimo para este cupón es $${descuento.valorMinimoPedido.toLocaleString()}`);
@@ -150,6 +154,7 @@ export class CartService {
             tipo: descuento.tipo,
             valor: descuento.valor,
             amount: discountAmount,
+            envioGratis: descuento.tipo === 'ENVIO_GRATIS',
         };
         cart.total = total;
 

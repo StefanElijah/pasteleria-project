@@ -14,6 +14,9 @@ import {
     Truck,
     LogOut,
     ArrowLeft,
+    Ticket,
+    Sparkles,
+    RotateCcw,
 } from 'lucide-react';
 
 function getInitials(user: any): string {
@@ -45,6 +48,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         { href: '/admin/categories', label: 'Categorías', icon: Tag },
         { href: '/admin/orders', label: 'Pedidos', icon: ShoppingCart },
         { href: '/admin/envios', label: 'Envíos', icon: Truck },
+        { href: '/admin/cupones', label: 'Cupones', icon: Ticket },
+        { href: '/admin/promos', label: 'Promos', icon: Sparkles },
+        { href: '/admin/devoluciones', label: 'Devoluciones', icon: RotateCcw },
     ], []);
 
     if (isLoading) {
