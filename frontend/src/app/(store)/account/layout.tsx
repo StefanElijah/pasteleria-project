@@ -2,11 +2,14 @@
 import { useRequireAuth } from '@/hooks/useAuth';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Package, User as UserIcon } from 'lucide-react';
+import { Package, User as UserIcon, MapPin, Ticket, Coins } from 'lucide-react';
 
 const NAV_ITEMS = [
     { label: 'Mis pedidos', href: '/account/orders', icon: Package },
-    { label: 'Perfil', href: '/account', icon: UserIcon },
+    { label: 'Direcciones', href: '/account/addresses', icon: MapPin },
+    { label: 'Mis cupones', href: '/account/cupones', icon: Ticket },
+    { label: 'Mis puntos', href: '/account/puntos', icon: Coins },
+    { label: 'Perfil', href: '/account/profile', icon: UserIcon },
 ];
 
 export default function AccountLayout({ children }: { children: React.ReactNode }) {

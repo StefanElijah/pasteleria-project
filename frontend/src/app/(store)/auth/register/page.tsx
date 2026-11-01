@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
 import { PasswordInput } from '@/components/ui/PasswordInput';
@@ -7,6 +7,7 @@ import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/componen
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { toTitleCase } from '@/lib/format';
 
 export default function RegisterPage() {
     const router = useRouter();
@@ -17,9 +18,17 @@ export default function RegisterPage() {
         email: '',
         password: '',
         primerNombre: '',
+        segundoNombre: '',
         primerApellido: '',
+        segundoApellido: '',
         telefono: '',
     });
+
+    // Prefill del email cuando viene desde el checkout invitado (?email=)
+    useEffect(() => {
+        const email = new URLSearchParams(window.location.search).get('email');
+        if (email) setFormData((prev) => (prev.email ? prev : { ...prev, email }));
+    }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -81,30 +90,60 @@ export default function RegisterPage() {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                             <div className="space-y-1.5">
                                 <label htmlFor="primerNombre" className="block text-sm font-medium">
-                                    Nombre
+                                    Primer nombre
                                 </label>
                                 <Input
                                     id="primerNombre"
                                     name="primerNombre"
-                                    placeholder="María"
+                                    placeholder="Daniel"
                                     value={formData.primerNombre}
                                     onChange={handleChange}
+                                    onBlur={(e) => setFormData((prev) => ({ ...prev, primerNombre: toTitleCase(e.target.value) }))}
                                     required
                                     autoComplete="given-name"
                                 />
                             </div>
                             <div className="space-y-1.5">
+                                <label htmlFor="segundoNombre" className="block text-sm font-medium">
+                                    Segundo nombre <span className="text-muted-foreground font-normal">(opcional)</span>
+                                </label>
+                                <Input
+                                    id="segundoNombre"
+                                    name="segundoNombre"
+                                    placeholder="Luis"
+                                    value={formData.segundoNombre}
+                                    onChange={handleChange}
+                                    onBlur={(e) => setFormData((prev) => ({ ...prev, segundoNombre: toTitleCase(e.target.value) }))}
+                                    autoComplete="additional-name"
+                                />
+                            </div>
+                            <div className="space-y-1.5">
                                 <label htmlFor="primerApellido" className="block text-sm font-medium">
-                                    Apellido
+                                    Primer apellido
                                 </label>
                                 <Input
                                     id="primerApellido"
                                     name="primerApellido"
-                                    placeholder="González"
+                                    placeholder="Gutiérrez"
                                     value={formData.primerApellido}
                                     onChange={handleChange}
+                                    onBlur={(e) => setFormData((prev) => ({ ...prev, primerApellido: toTitleCase(e.target.value) }))}
                                     required
                                     autoComplete="family-name"
+                                />
+                            </div>
+                            <div className="space-y-1.5">
+                                <label htmlFor="segundoApellido" className="block text-sm font-medium">
+                                    Segundo apellido <span className="text-muted-foreground font-normal">(opcional)</span>
+                                </label>
+                                <Input
+                                    id="segundoApellido"
+                                    name="segundoApellido"
+                                    placeholder="Pérez"
+                                    value={formData.segundoApellido}
+                                    onChange={handleChange}
+                                    onBlur={(e) => setFormData((prev) => ({ ...prev, segundoApellido: toTitleCase(e.target.value) }))}
+                                    autoComplete="additional-name"
                                 />
                             </div>
                         </div>

@@ -9,6 +9,7 @@ import { LocalStrategy } from './strategies/local.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { JwtRefreshStrategy } from './strategies/jwt-refresh.strategy';
 import { CartModule } from '@modules/sales/cart/cart.module';
+import { LoyaltyModule } from '@modules/loyalty/loyalty.module';
 
 @Module({
     imports: [
@@ -22,6 +23,7 @@ import { CartModule } from '@modules/sales/cart/cart.module';
             }),
         }),
         CartModule,
+        LoyaltyModule,
     ],
     providers: [AuthService, LocalStrategy, JwtStrategy, JwtRefreshStrategy],
     controllers: [AuthController],
