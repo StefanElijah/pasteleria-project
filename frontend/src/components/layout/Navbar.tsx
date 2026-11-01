@@ -73,8 +73,8 @@ export default function Navbar() {
         }
     };
 
-    const handleSuggestionClick = (productId: string) => {
-        router.push(`/products/${productId}`);
+    const handleSuggestionClick = (slug: string) => {
+        router.push(`/products/${slug}`);
         setSearchTerm('');
         setShowSuggestions(false);
     };
@@ -220,7 +220,7 @@ export default function Navbar() {
                                             <div
                                                 key={product.id}
                                                 className="p-2 hover:bg-gray-100 cursor-pointer flex items-center gap-3"
-                                                onClick={() => handleSuggestionClick(product.id)}
+                                                onClick={() => handleSuggestionClick(product.slug)}
                                             >
                                                 <div className="relative w-10 h-10 rounded-md overflow-hidden bg-gray-100 shrink-0">
                                                     {(() => {
