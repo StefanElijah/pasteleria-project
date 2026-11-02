@@ -27,11 +27,6 @@ export class CreateProductDto {
     @Type(() => Number)
     precioComparacion?: number | null;
 
-    @IsInt()
-    @Min(0)
-    @Type(() => Number)
-    stock!: number;
-
     @IsOptional()
     @IsArray()
     @IsString({ each: true })

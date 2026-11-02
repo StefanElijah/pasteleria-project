@@ -54,11 +54,4 @@ export class DevolucionesController {
     procesar(@Param('id') id: string) {
         return this.devolucionesService.procesar(id);
     }
-
-    @Post(':id/reponer-stock')
-    @UseGuards(RolesGuard)
-    @Roles('ADMIN', 'MODERADOR')
-    reponerStock(@Param('id') id: string) {
-        return this.devolucionesService.reponerStock(id);
-    }
 }

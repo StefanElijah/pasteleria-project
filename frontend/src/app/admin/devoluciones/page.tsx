@@ -49,16 +49,6 @@ export default function AdminDevolucionesPage() {
         }
     };
 
-    const reponerStock = async (id: string) => {
-        if (!confirm('¿Reponer el stock de los productos devueltos?')) return;
-        try {
-            await api.post(`/devoluciones/${id}/reponer-stock`);
-            toast.success('Stock repuesto');
-        } catch (err: any) {
-            toast.error(err?.response?.data?.message || 'No se pudo reponer stock');
-        }
-    };
-
     return (
         <div>
             <h1 className="text-2xl font-bold mb-4">Devoluciones</h1>
@@ -106,9 +96,6 @@ export default function AdminDevolucionesPage() {
                                                     )}
                                                     {(d.estado === 'APROBADA' || d.estado === 'SOLICITADA') && (
                                                         <Button size="sm" className="bg-rose-600 hover:bg-rose-700" onClick={() => procesar(d.id)}>Procesar</Button>
-                                                    )}
-                                                    {d.estado === 'PROCESADA' && (
-                                                        <Button size="sm" variant="outline" onClick={() => reponerStock(d.id)}>Reponer stock</Button>
                                                     )}
                                                 </TableCell>
                                             </TableRow>

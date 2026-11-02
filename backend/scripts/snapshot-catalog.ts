@@ -40,7 +40,6 @@ async function main() {
             descripcion: p.descripcion,
             precio: p.precio,
             precioComparacion: p.precioComparacion,
-            stock: p.stock,
             imagenPrincipal: p.imagenPrincipal,
             imagenes: p.imagenes,
             novedad: p.novedad,

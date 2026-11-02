@@ -38,7 +38,7 @@ export default function ProductDetailPage() {
     }, [slug, setLastLabel, setMiddle, clearAll]);
 
     const handleAddToCart = async () => {
-        if (!product || product.stock === 0) return;
+        if (!product) return;
         setIsAdding(true);
         try {
             await addItem(product.id, quantity);
@@ -46,8 +46,6 @@ export default function ProductDetailPage() {
             setIsAdding(false);
         }
     };
-
-    const isOutOfStock = product?.stock === 0;
 
     const mainImage = selectedImage || product?.imagenPrincipal || product?.imagenes?.[0];
     const allImages = [
@@ -108,11 +106,6 @@ export default function ProductDetailPage() {
             <div>
                 <div className="flex items-center gap-3 mb-4">
                     <h1 className="text-3xl font-bold">{product.nombre}</h1>
-                    {isOutOfStock && (
-                        <span className="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
-                            Sin stock
-                        </span>
-                    )}
                 </div>
                 <p className="text-2xl text-rose-600 mt-2">${formatPrice(product.precio)}</p>
                 {product.precioComparacion && (
@@ -121,34 +114,26 @@ export default function ProductDetailPage() {
                     </p>
                 )}
                 <p className="text-gray-600 mt-4">{product.descripcion}</p>
-                {!isOutOfStock && (
-                    <div className="mt-6 flex items-center gap-4">
-                        <div className="flex items-center border rounded">
-                            <button
-                                onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                                className="px-3 py-1 border-r"
-                            >
-                                -
-                            </button>
-                            <span className="px-4 py-1">{quantity}</span>
-                            <button
-                                onClick={() => setQuantity(quantity + 1)}
-                                className="px-3 py-1 border-l"
-                            >
-                                +
-                            </button>
-                        </div>
-                        <Button onClick={handleAddToCart} disabled={isAdding}>
-                            {isAdding ? 'Agregando...' : 'Agregar al Carrito'}
-                        </Button>
+                <div className="mt-6 flex items-center gap-4">
+                    <div className="flex items-center border rounded">
+                        <button
+                            onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                            className="px-3 py-1 border-r"
+                        >
+                            -
+                        </button>
+                        <span className="px-4 py-1">{quantity}</span>
+                        <button
+                            onClick={() => setQuantity(quantity + 1)}
+                            className="px-3 py-1 border-l"
+                        >
+                            +
+                        </button>
                     </div>
-                )}
-                {isOutOfStock && (
-                    <div className="mt-6">
-                        <Button disabled className="w-full">Sin stock</Button>
-                    </div>
-                )}
-                <p className="text-sm text-gray-500 mt-4">Stock disponible: {product.stock}</p>
+                    <Button onClick={handleAddToCart} disabled={isAdding}>
+                        {isAdding ? 'Agregando...' : 'Agregar al Carrito'}
+                    </Button>
+                </div>
             </div>
         </div>
         </div>

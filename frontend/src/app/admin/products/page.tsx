@@ -71,7 +71,6 @@ export default function AdminProductsPage() {
                             <th className="p-3 text-sm font-semibold text-gray-700">Nombre</th>
                             <th className="p-3 text-sm font-semibold text-gray-700">Slug</th>
                             <th className="p-3 text-sm font-semibold text-gray-700">Precio</th>
-                            <th className="p-3 text-sm font-semibold text-gray-700">Stock</th>
                             <th className="p-3 text-sm font-semibold text-gray-700">Categoría</th>
                             <th className="p-3 text-sm font-semibold text-gray-700">Estado</th>
                             <th className="p-3 text-sm font-semibold text-gray-700">Acciones</th>
@@ -88,7 +87,6 @@ export default function AdminProductsPage() {
                                 <td className="p-3 text-sm font-medium text-gray-900">
                                     ${formatPrice(product.precio)}
                                 </td>
-                                <td className="p-3 text-sm text-gray-600">{product.stock}</td>
                                 <td className="p-3 text-sm text-gray-600">{product.categoria?.nombre || '—'}</td>
                                 <td className="p-3">
                                     <Switch

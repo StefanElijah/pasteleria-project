@@ -3,10 +3,10 @@ export default function DevolucionReembolsoPage() {
         <>
             <h1 className="text-3xl font-bold mb-6 text-center">Política de Devolución y Reembolso</h1>
             <div className="prose prose-sm sm:prose lg:prose-lg max-w-none">
-                <p><strong>Última actualización:</strong> [DD/MM/YYYY]</p>
+                <p><strong>Última actualización:</strong> 02/11/2026</p>
 
                 <h2>1. Aceptación General</h2>
-                <p>Al realizar una compra en Pastelería Mil Sabores, aceptas nuestra política de devolución y reembolso, diseñada conforme a la Ley del Consumidor Chilena (Ley N° 19.496) y considerando la naturaleza perecedera de nuestros productos.</p>
+                <p>Al realizar una compra o reserva en Pastelería Mil Sabores, aceptas nuestra política de devolución y reembolso, diseñada conforme a la Ley del Consumidor Chilena (Ley N° 19.496) y considerando la naturaleza perecedera de nuestros productos.</p>
 
                 <h2>2. Derecho a Retracto en Productos Perecederos</h2>
                 <p><strong>Por la naturaleza perecedera de nuestros productos:</strong><br />
@@ -40,7 +40,7 @@ export default function DevolucionReembolsoPage() {
                 <h2>6. Opciones de Solución</h2>
                 <p>Una vez aprobada la devolución, ofrecemos:</p>
                 <ul>
-                    <li><strong>Reposición del producto:</strong> Envío de un nuevo producto igual</li>
+                    <li><strong>Reposición del producto:</strong> Envío de un nuevo producto igual, sujeto a disponibilidad de producción</li>
                     <li><strong>Cambio por producto equivalente:</strong> Mismo valor o características similares</li>
                     <li><strong>Crédito en la tienda:</strong> Para futuras compras (válido por 90 días)</li>
                     <li><strong>Reembolso total:</strong> Devolución del monto pagado (procesado en 5-10 días hábiles)</li>
@@ -49,7 +49,8 @@ export default function DevolucionReembolsoPage() {
                 <h2>7. Productos Personalizados</h2>
                 <p><strong>Los productos personalizados (tortas con mensajes, decoraciones específicas) NO son elegibles para devolución</strong>, excepto en casos de defectos de fabricación o no conformidad con lo acordado.</p>
 
-                <h2>8. Cancelaciones de Pedidos</h2>
+                <h2>8. Cancelaciones de Reservas y Pedidos</h2>
+                <p>Las reservas se preparan por encargo; no se mantiene inventario disponible. Los porcentajes se aplican sobre el monto pagado:</p>
                 <p>• <strong>Antes de la preparación:</strong> Reembolso del 100%<br />
                     • <strong>Durante la preparación:</strong> Reembolso del 50% (por ingredientes utilizados)<br />
                     • <strong>Una vez enviado:</strong> No aplica cancelación</p>

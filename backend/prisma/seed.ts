@@ -64,7 +64,6 @@ async function main() {
             descripcion: string | null;
             precio: number;
             precioComparacion: number | null;
-            stock: number;
             imagenPrincipal: string | null;
             imagenes: string[];
             novedad: boolean;
@@ -106,7 +105,6 @@ async function main() {
                 descripcion: producto.descripcion,
                 precio: producto.precio,
                 precioComparacion: producto.precioComparacion,
-                stock: producto.stock,
                 imagenPrincipal: producto.imagenPrincipal,
                 imagenes: producto.imagenes,
                 novedad: producto.novedad,

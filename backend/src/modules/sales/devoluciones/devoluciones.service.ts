@@ -153,20 +153,4 @@ export class DevolucionesService {
             puntosReintegrados,
         };
     }
-
-    async reponerStock(id: string) {
-        const dev = await this.prisma.devolucion.findUnique({
-            where: { id },
-            include: { items: { include: { itemPedido: true } } },
-        });
-        if (!dev) throw new NotFoundException('Devolución no encontrada');
-
-        for (const item of dev.items) {
-            await this.prisma.producto.update({
-                where: { id: item.itemPedido.productoId },
-                data: { stock: { increment: item.cantidad } },
-            });
-        }
-        return { message: 'Stock repuesto', items: dev.items.length };
-    }
 }

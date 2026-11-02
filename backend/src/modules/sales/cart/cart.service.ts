@@ -28,7 +28,6 @@ export class CartService {
             where: { id: productId, activo: true },
         });
         if (!product) throw new NotFoundException('Producto no disponible');
-        if (product.stock < quantity) throw new BadRequestException('Stock insuficiente');
 
         const existingIndex = cart.items.findIndex(item => item.productId === productId);
         if (existingIndex >= 0) {
@@ -63,8 +62,6 @@ export class CartService {
         const cart = await this.getCart(cartId);
         const item = cart.items.find(item => item.productId === productId);
         if (!item) throw new NotFoundException('Producto no encontrado en el carrito');
-        const product = await this.prisma.producto.findUnique({ where: { id: productId } });
-        if (product && product.stock < quantity) throw new BadRequestException('Stock insuficiente');
         item.quantity = quantity;
         cart.total = cart.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
         await this.redis.setex(this.getCartKey(cartId), this.CART_TTL, JSON.stringify(cart));

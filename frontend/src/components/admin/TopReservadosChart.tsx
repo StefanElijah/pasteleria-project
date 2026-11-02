@@ -9,33 +9,43 @@ import {
 import { useMemo, memo } from 'react';
 
 const chartConfig = {
-  stock: { label: 'Stock', color: '#ef4444' },
+  cantidad: { label: 'Unidades reservadas', color: '#e11d48' },
 };
 
-function getStockColor(stock: number): string {
-  if (stock <= 3) return '#ef4444';
-  if (stock <= 6) return '#f97316';
-  if (stock <= 10) return '#eab308';
-  return '#64748b';
-}
+const COLORS = [
+  '#e11d48',
+  '#f43f5e',
+  '#fb7185',
+  '#f97316',
+  '#f59e0b',
+  '#eab308',
+  '#84cc16',
+  '#22c55e',
+  '#14b8a6',
+  '#0ea5e9',
+];
 
 interface Props {
-  products: { id: string; nombre: string; stock: number; imagenPrincipal?: string }[];
+  products: { id: string; nombre: string; cantidad: number; imagenPrincipal?: string | null }[];
 }
 
-const StockBajoChart = memo(function StockBajoChart({ products }: Props) {
+const TopReservadosChart = memo(function TopReservadosChart({ products }: Props) {
   const data = useMemo(() => {
     return [...products]
-      .sort((a, b) => a.stock - b.stock)
+      .sort((a, b) => b.cantidad - a.cantidad)
       .slice(0, 10)
       .map((p) => ({
         nombre: p.nombre.length > 30 ? p.nombre.slice(0, 27) + '...' : p.nombre,
-        stock: p.stock,
+        cantidad: p.cantidad,
       }));
   }, [products]);
 
   if (data.length === 0) {
-    return <p className="text-sm text-muted-foreground py-8 text-center">No hay productos registrados.</p>;
+    return (
+      <p className="text-sm text-muted-foreground py-8 text-center">
+        Aún no hay reservas en los últimos 30 días.
+      </p>
+    );
   }
 
   return (
@@ -73,13 +83,13 @@ const StockBajoChart = memo(function StockBajoChart({ products }: Props) {
             />
           }
         />
-        <Bar dataKey="stock" radius={[0, 4, 4, 0]} barSize={16}>
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={getStockColor(entry.stock)} />
+        <Bar dataKey="cantidad" radius={[0, 4, 4, 0]} barSize={16}>
+          {data.map((_, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Bar>
       </BarChart>
     </ChartContainer>
   );
 });
-export default StockBajoChart;
+export default TopReservadosChart;

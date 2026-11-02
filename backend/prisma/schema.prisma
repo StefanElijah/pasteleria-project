@@ -153,7 +153,6 @@ model Producto {
   descripcion       String?
   precio            Int
   precioComparacion Int?
-  stock             Int      @default(0)
   imagenPrincipal   String?
   imagenes          String[]
   novedad           Boolean  @default(false)

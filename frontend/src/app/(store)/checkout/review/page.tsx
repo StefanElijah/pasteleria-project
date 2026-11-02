@@ -25,6 +25,7 @@ export default function ReviewStep() {
     const [error, setError] = useState('');
     const [orderCreated, setOrderCreated] = useState<any>(null);
     const [calculatingShipping, setCalculatingShipping] = useState(true);
+    const [fechaEstimada, setFechaEstimada] = useState<string | null>(null);
     const [copied, setCopied] = useState(false);
     const [puntosSaldo, setPuntosSaldo] = useState(0);
 
@@ -50,6 +51,7 @@ export default function ReviewStep() {
             })
                 .then((res) => {
                     setShippingCost(res.data.costo);
+                    setFechaEstimada(res.data.fechaEstimada || null);
                 })
                 .catch(() => { })
                 .finally(() => setCalculatingShipping(false));
@@ -249,6 +251,17 @@ export default function ReviewStep() {
                         <p className="text-sm text-gray-400">Calculando costo...</p>
                     ) : (
                         <p className="text-sm font-medium">${displayShipping.toLocaleString()}</p>
+                    )}
+                    {!calculatingShipping && fechaEstimada && (
+                        <p className="text-sm text-gray-500 mt-1">
+                            Fecha estimada de entrega:{' '}
+                            {new Date(fechaEstimada).toLocaleDateString('es-CL', {
+                                weekday: 'long',
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric',
+                            })}
+                        </p>
                     )}
                 </div>
 

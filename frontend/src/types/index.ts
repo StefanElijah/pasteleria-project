@@ -20,7 +20,6 @@ export interface Product {
     descripcion?: string;
     precio: number;
     precioComparacion?: number;
-    stock: number;
     imagenPrincipal?: string;
     imagenes: string[];
     novedad: boolean;
@@ -227,7 +226,7 @@ export interface DashboardStats {
     revenueByPlatform: { date: string; mobile: number; desktop: number }[];
     revenueByPaymentMethod: { date: string; tarjeta: number; transferencia: number; efectivo: number; pago_entrega: number }[];
     monthlyComparison: { label: string; añoActual: number; añoAnterior: number }[];
-    lowStockProducts: { id: string; nombre: string; stock: number; imagenPrincipal?: string }[];
+    topReservedProducts: { id: string; nombre: string; cantidad: number; imagenPrincipal?: string | null }[];
     revenueByCategory: { categoria: string; total: number }[];
     recentOrders: { id: string; numeroPedido: string; total: number; estado: string; createdAt: string }[];
 }

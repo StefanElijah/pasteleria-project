@@ -1,4 +1,4 @@
-{
+﻿{
     "categorias": [
         {
             "nombre": "Especiales",
@@ -15,7 +15,7 @@
             "ordenVisual": 0
         },
         {
-            "nombre": "Sin Azúcar",
+            "nombre": "Sin AzÃºcar",
             "slug": "sin-azucar",
             "descripcion": null,
             "activo": true,
@@ -64,7 +64,6 @@
             "descripcion": "Rico y denso, este brownie es perfecto para quienes necesitan evitar el gluten sin sacrificar el sabor.",
             "precio": 3990,
             "precioComparacion": null,
-            "stock": 13,
             "imagenPrincipal": "https://res.cloudinary.com/dtkxwlj5g/image/upload/v1784151576/pasteleria-mil-sabores/productos/o0m4d4msynduxypps3yy.jpg",
             "imagenes": [],
             "novedad": true,
@@ -73,12 +72,11 @@
             "categoriaSlug": "sin-gluten"
         },
         {
-            "nombre": "Cheesecake Sin Azúcar",
+            "nombre": "Cheesecake Sin AzÃºcar",
             "slug": "cheesecake-sin-azucar",
-            "descripcion": "Suave y cremoso, este cheesecake es una opción perfecta para disfrutar sin culpa.",
+            "descripcion": "Suave y cremoso, este cheesecake es una opciÃ³n perfecta para disfrutar sin culpa.",
             "precio": 29990,
             "precioComparacion": null,
-            "stock": 8,
             "imagenPrincipal": "https://res.cloudinary.com/dtkxwlj5g/image/upload/v1784151341/pasteleria-mil-sabores/productos/dxwensigucvmlfzjvykg.png",
             "imagenes": [],
             "novedad": false,
@@ -89,10 +87,9 @@
         {
             "nombre": "Empanada de Manzana",
             "slug": "empanada-de-manzana",
-            "descripcion": "Pastelería tradicional rellena de manzanas especiadas, perfecta para un dulce desayuno o merienda.",
+            "descripcion": "PastelerÃ­a tradicional rellena de manzanas especiadas, perfecta para un dulce desayuno o merienda.",
             "precio": 2990,
             "precioComparacion": null,
-            "stock": 26,
             "imagenPrincipal": "https://res.cloudinary.com/dtkxwlj5g/image/upload/v1784151397/pasteleria-mil-sabores/productos/gmxinxv0liysmrjvivk0.jpg",
             "imagenes": [],
             "novedad": false,
@@ -103,10 +100,9 @@
         {
             "nombre": "Galletas Veganas de Avena",
             "slug": "galletas-veganas-de-avena",
-            "descripcion": "Crujientes y sabrosas, estas galletas son una excelente opción para un snack saludable y vegano.",
+            "descripcion": "Crujientes y sabrosas, estas galletas son una excelente opciÃ³n para un snack saludable y vegano.",
             "precio": 3990,
             "precioComparacion": null,
-            "stock": 14,
             "imagenPrincipal": "https://res.cloudinary.com/dtkxwlj5g/image/upload/v1784151760/pasteleria-mil-sabores/productos/ojoqfbuznh3xz2r4tuwx.jpg",
             "imagenes": [],
             "novedad": false,
@@ -120,7 +116,6 @@
             "descripcion": "Postre individual cremoso y suave, hecho con chocolate de alta calidad, ideal para los amantes del chocolate.",
             "precio": 3990,
             "precioComparacion": null,
-            "stock": 23,
             "imagenPrincipal": "https://res.cloudinary.com/dtkxwlj5g/image/upload/v1784151996/pasteleria-mil-sabores/productos/n1izhahso7pxsdazebf5.jpg",
             "imagenes": [],
             "novedad": false,
@@ -131,10 +126,9 @@
         {
             "nombre": "Pan Sin Gluten",
             "slug": "pan-sin-gluten",
-            "descripcion": "Suave y esponjoso, ideal para sándwiches o para acompañar cualquier comida.",
+            "descripcion": "Suave y esponjoso, ideal para sÃ¡ndwiches o para acompaÃ±ar cualquier comida.",
             "precio": 3490,
             "precioComparacion": null,
-            "stock": 20,
             "imagenPrincipal": "https://res.cloudinary.com/dtkxwlj5g/image/upload/v1784151635/pasteleria-mil-sabores/productos/lebbkeio1ghweexdawju.jpg",
             "imagenes": [],
             "novedad": false,
@@ -148,7 +142,6 @@
             "descripcion": "La tarta Pavlova es un postre sofisticado y visualmente impactante, ideal para celebraciones. Su estructura destaca por una base de merengue crujiente por fuera y suave y ligero por dentro, coronada generosamente con crema batida y coronada con frutas frescas o frutos del bosque",
             "precio": 21990,
             "precioComparacion": null,
-            "stock": 7,
             "imagenPrincipal": "https://res.cloudinary.com/dtkxwlj5g/image/upload/v1784152394/pasteleria-mil-sabores/productos/jolexpbz3d9hzoxcpklm.jpg",
             "imagenes": [],
             "novedad": true,
@@ -159,10 +152,9 @@
         {
             "nombre": "Tarta Tres Leches",
             "slug": "tarta-tres-leches",
-            "descripcion": "Exquisito y tradicional postre de bizcocho artesanal, generosamente humedecido con nuestra clásica e irresistible mezcla de tres leches (leche evaporada, condensada y crema). Relleno de suave manjar y coronado con un fresco y ligero merengue italiano. Un clásico dulce, cremoso y perfecto para cualquier celebración.",
+            "descripcion": "Exquisito y tradicional postre de bizcocho artesanal, generosamente humedecido con nuestra clÃ¡sica e irresistible mezcla de tres leches (leche evaporada, condensada y crema). Relleno de suave manjar y coronado con un fresco y ligero merengue italiano. Un clÃ¡sico dulce, cremoso y perfecto para cualquier celebraciÃ³n.",
             "precio": 18990,
             "precioComparacion": null,
-            "stock": 7,
             "imagenPrincipal": "https://res.cloudinary.com/dtkxwlj5g/image/upload/v1784152317/pasteleria-mil-sabores/productos/veq776utjgyyjutenxsh.png",
             "imagenes": [],
             "novedad": false,
@@ -173,10 +165,9 @@
         {
             "nombre": "Tarta de Santiago",
             "slug": "tarta-de-santiago",
-            "descripcion": "Tradicional tarta española hecha con almendras, azúcar, y huevos, una delicia para los amantes de los postres clásicos.",
+            "descripcion": "Tradicional tarta espaÃ±ola hecha con almendras, azÃºcar, y huevos, una delicia para los amantes de los postres clÃ¡sicos.",
             "precio": 5990,
             "precioComparacion": null,
-            "stock": 9,
             "imagenPrincipal": "https://res.cloudinary.com/dtkxwlj5g/image/upload/v1784151462/pasteleria-mil-sabores/productos/ppjew5qgsby7ptledu6y.jpg",
             "imagenes": [],
             "novedad": false,
@@ -185,12 +176,11 @@
             "categoriaSlug": "tradicionales"
         },
         {
-            "nombre": "Tiramisú Clásico",
+            "nombre": "TiramisÃº ClÃ¡sico",
             "slug": "tiramisu-clasico",
-            "descripcion": "Un postre italiano individual con capas de café, mascarpone y cacao, perfecto para finalizar cualquier comida.",
+            "descripcion": "Un postre italiano individual con capas de cafÃ©, mascarpone y cacao, perfecto para finalizar cualquier comida.",
             "precio": 5490,
             "precioComparacion": null,
-            "stock": 36,
             "imagenPrincipal": "https://res.cloudinary.com/dtkxwlj5g/image/upload/v1784152157/pasteleria-mil-sabores/productos/h7ei5nomjgnwoybrlanu.png",
             "imagenes": [],
             "novedad": false,
@@ -201,10 +191,9 @@
         {
             "nombre": "Torta Circular de Manjar",
             "slug": "torta-circular-de-manjar",
-            "descripcion": "Torta tradicional chilena con manjar y nueces, un deleite para los amantes de los sabores dulces y clásicos.",
+            "descripcion": "Torta tradicional chilena con manjar y nueces, un deleite para los amantes de los sabores dulces y clÃ¡sicos.",
             "precio": 29990,
             "precioComparacion": null,
-            "stock": 1,
             "imagenPrincipal": "https://res.cloudinary.com/dtkxwlj5g/image/upload/v1784152797/pasteleria-mil-sabores/productos/gydv9gwkuqiji11k463m.jpg",
             "imagenes": [],
             "novedad": false,
@@ -215,10 +204,9 @@
         {
             "nombre": "Torta Circular de Vainilla",
             "slug": "torta-circular-de-vainilla",
-            "descripcion": "Bizcocho de vainilla clásico relleno con crema pastelera y cubierto con un glaseado dulce, perfecto para cualquier ocasión.",
+            "descripcion": "Bizcocho de vainilla clÃ¡sico relleno con crema pastelera y cubierto con un glaseado dulce, perfecto para cualquier ocasiÃ³n.",
             "precio": 25990,
             "precioComparacion": null,
-            "stock": 6,
             "imagenPrincipal": "https://res.cloudinary.com/dtkxwlj5g/image/upload/v1784152711/pasteleria-mil-sabores/productos/n0qziegpr18bpvud6ocx.png",
             "imagenes": [],
             "novedad": false,
@@ -232,7 +220,6 @@
             "descripcion": "Deliciosa torta de chocolate con capas de ganache y un toque de avellanas. Personalizable con mensajes especiales.",
             "precio": 32990,
             "precioComparacion": null,
-            "stock": 1,
             "imagenPrincipal": "https://res.cloudinary.com/dtkxwlj5g/image/upload/v1784152855/pasteleria-mil-sabores/productos/ei8kwgniipsi3lnty9gq.png",
             "imagenes": [
                 "https://res.cloudinary.com/dtkxwlj5g/image/upload/v1784152858/pasteleria-mil-sabores/productos/mzbngep0m4wpxykbowdg.png"
@@ -248,7 +235,6 @@
             "descripcion": "Una mezcla de frutas frescas y crema chantilly sobre un suave bizcocho de vainilla, ideal para celebraciones.",
             "precio": 39990,
             "precioComparacion": null,
-            "stock": 4,
             "imagenPrincipal": "https://res.cloudinary.com/dtkxwlj5g/image/upload/v1784152935/pasteleria-mil-sabores/productos/xhhycuzmtbvkvzzom6zu.png",
             "imagenes": [],
             "novedad": false,
@@ -259,10 +245,9 @@
         {
             "nombre": "Torta Especial de Boda",
             "slug": "torta-especial-de-boda",
-            "descripcion": "Elegante y deliciosa, esta torta está diseñada para ser el centro de atención en cualquier boda.",
+            "descripcion": "Elegante y deliciosa, esta torta estÃ¡ diseÃ±ada para ser el centro de atenciÃ³n en cualquier boda.",
             "precio": 59990,
             "precioComparacion": null,
-            "stock": 2,
             "imagenPrincipal": "https://res.cloudinary.com/dtkxwlj5g/image/upload/v1784153081/pasteleria-mil-sabores/productos/jvny2i5avlmztwnrc9mz.png",
             "imagenes": [],
             "novedad": false,
@@ -271,12 +256,11 @@
             "categoriaSlug": "especiales"
         },
         {
-            "nombre": "Torta Especial de Cumpleaños",
+            "nombre": "Torta Especial de CumpleaÃ±os",
             "slug": "torta-especial-de-cumpleanos",
-            "descripcion": "Diseñada especialmente para celebraciones, personalizable con decoraciones y mensajes únicos.",
+            "descripcion": "DiseÃ±ada especialmente para celebraciones, personalizable con decoraciones y mensajes Ãºnicos.",
             "precio": 39990,
             "precioComparacion": null,
-            "stock": 1,
             "imagenPrincipal": "https://res.cloudinary.com/dtkxwlj5g/image/upload/v1784153010/pasteleria-mil-sabores/productos/rqx8l3fbjguwdvqndgkb.png",
             "imagenes": [],
             "novedad": false,
@@ -285,12 +269,11 @@
             "categoriaSlug": "especiales"
         },
         {
-            "nombre": "Torta Sin Azúcar de Naranja",
+            "nombre": "Torta Sin AzÃºcar de Naranja",
             "slug": "torta-sin-azucar-de-naranja",
-            "descripcion": "Torta ligera y deliciosa, endulzada naturalmente, ideal para quienes buscan opciones más saludables.",
+            "descripcion": "Torta ligera y deliciosa, endulzada naturalmente, ideal para quienes buscan opciones mÃ¡s saludables.",
             "precio": 34990,
             "precioComparacion": null,
-            "stock": 5,
             "imagenPrincipal": "https://res.cloudinary.com/dtkxwlj5g/image/upload/v1784151281/pasteleria-mil-sabores/productos/mf1ndg4zwhgddr2gnjtp.png",
             "imagenes": [],
             "novedad": false,
@@ -301,10 +284,9 @@
         {
             "nombre": "Torta Vegana de Chocolate",
             "slug": "torta-vegana-de-chocolate",
-            "descripcion": "Torta de chocolate húmeda y deliciosa, hecha sin productos de origen animal, perfecta para veganos.",
+            "descripcion": "Torta de chocolate hÃºmeda y deliciosa, hecha sin productos de origen animal, perfecta para veganos.",
             "precio": 29990,
             "precioComparacion": null,
-            "stock": 5,
             "imagenPrincipal": "https://res.cloudinary.com/dtkxwlj5g/image/upload/v1784151730/pasteleria-mil-sabores/productos/ig5mrwspq9hu46fid10a.jpg",
             "imagenes": [],
             "novedad": false,

@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import DistribucionEnviosChart from '@/components/admin/DistribucionEnviosChart';
 import DistribucionPedidosChart from '@/components/admin/DistribucionPedidosChart';
-import StockBajoChart from '@/components/admin/StockBajoChart';
+import TopReservadosChart from '@/components/admin/TopReservadosChart';
 import ComparacionAnualChart from '@/components/admin/ComparacionAnualChart';
 import VentasPorCategoriaChart from '@/components/admin/VentasPorCategoriaChart';
 import VentasPorPlataformaChart from '@/components/admin/VentasPorPlataformaChart';
@@ -112,10 +112,10 @@ export default function AdminDashboard() {
 
             <Card>
                 <CardHeader>
-                    <CardTitle className="text-base">Productos con menor stock</CardTitle>
+                    <CardTitle className="text-base">Productos más reservados</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <StockBajoChart products={stats.lowStockProducts} />
+                    <TopReservadosChart products={stats.topReservedProducts} />
                 </CardContent>
             </Card>
 

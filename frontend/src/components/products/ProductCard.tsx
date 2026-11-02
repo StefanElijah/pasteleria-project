@@ -12,7 +12,6 @@ export default function ProductCard({ product }: { product: Product }) {
     const [isLoading, setIsLoading] = useState(false);
 
     const handleAddToCart = async () => {
-        if (product.stock === 0) return;
         setIsLoading(true);
         try {
             await addItem(product.id, 1);
@@ -22,8 +21,6 @@ export default function ProductCard({ product }: { product: Product }) {
     };
 
     if (!product.activo) return null;
-
-    const isOutOfStock = product.stock === 0;
 
     return (
         <div className="group flex flex-col rounded-2xl overflow-hidden border shadow-sm hover:shadow-md transition-shadow bg-card h-full">
@@ -44,11 +41,6 @@ export default function ProductCard({ product }: { product: Product }) {
                             <div className="w-full h-full flex items-center justify-center text-muted-foreground" />
                         );
                     })()}
-                    {isOutOfStock && (
-                        <div className="absolute top-2 right-2 z-10 bg-destructive text-destructive-foreground text-xs font-medium px-2.5 py-1 rounded-full">
-                            Sin stock
-                        </div>
-                    )}
                 </div>
             </Link>
             <div className="flex flex-col flex-1 px-3 sm:px-4 py-3">
@@ -63,11 +55,11 @@ export default function ProductCard({ product }: { product: Product }) {
                     </p>
                     <Button
                         onClick={handleAddToCart}
-                        disabled={isLoading || isOutOfStock}
+                        disabled={isLoading}
                         variant="outline"
                         className="w-full mt-2"
                     >
-                        {isOutOfStock ? 'Sin stock' : isLoading ? 'Agregando...' : 'Agregar al Carrito'}
+                        {isLoading ? 'Agregando...' : 'Agregar al Carrito'}
                     </Button>
                 </div>
             </div>

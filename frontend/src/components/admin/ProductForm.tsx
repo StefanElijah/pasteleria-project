@@ -24,7 +24,6 @@ const productSchema = z.object({
     descripcion: z.string().optional(),
     precio: z.number().min(1, "El precio es requerido y debe ser mayor a 0"),
     precioComparacion: z.number().min(0).optional().nullable(),
-    stock: z.number().int().min(1, "El stock debe ser al menos 1"),
     imagenPrincipal: z.string().min(1, "La imagen principal es requerida"),
     imagenes: z.array(z.string()).max(5).optional(),
     novedad: z.boolean().optional(),
@@ -51,7 +50,6 @@ export function ProductForm({ initialData, categories, onSubmit, isLoading, onCa
             destacado: false,
             activo: true,
             precio: 0,
-            stock: 0,
             imagenes: [],
             imagenPrincipal: "",
         },
@@ -100,11 +98,6 @@ export function ProductForm({ initialData, categories, onSubmit, isLoading, onCa
                 <label>Precio *</label>
                 <Input type="number" step="1" {...register('precio', { valueAsNumber: true })} />
                 {errors.precio && <p className="text-red-500 text-sm">{errors.precio.message}</p>}
-            </div>
-            <div>
-                <label>Stock *</label>
-                <Input type="number" {...register('stock', { valueAsNumber: true })} />
-                {errors.stock && <p className="text-red-500 text-sm">{errors.stock.message}</p>}
             </div>
             <div>
                 <label>Categoría *</label>

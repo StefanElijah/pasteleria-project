@@ -45,12 +45,40 @@ export class StatsService {
     const revenueByPaymentMethod = this.computeRevenueByPaymentMethod(recentOrders);
     const monthlyComparison = this.computeMonthlyComparison(recentOrders);
 
-    const lowStockProducts = await this.prisma.producto.findMany({
-      where: { activo: true, stock: { lte: 10 } },
-      orderBy: { stock: 'asc' },
-      take: 10,
-      select: { id: true, nombre: true, stock: true, imagenPrincipal: true },
+    const recentItems = await this.prisma.itemPedido.findMany({
+      where: {
+        pedido: {
+          createdAt: { gte: thirtyDaysAgo },
+          estado: { not: 'CANCELADO' },
+        },
+      },
+      select: {
+        productoId: true,
+        cantidad: true,
+        producto: { select: { nombre: true, imagenPrincipal: true } },
+      },
     });
+
+    const reservedMap = new Map<
+      string,
+      { id: string; nombre: string; cantidad: number; imagenPrincipal: string | null }
+    >();
+    for (const item of recentItems) {
+      const existing = reservedMap.get(item.productoId);
+      if (existing) {
+        existing.cantidad += item.cantidad;
+      } else {
+        reservedMap.set(item.productoId, {
+          id: item.productoId,
+          nombre: item.producto?.nombre || 'Producto',
+          cantidad: item.cantidad,
+          imagenPrincipal: item.producto?.imagenPrincipal || null,
+        });
+      }
+    }
+    const topReservedProducts = Array.from(reservedMap.values())
+      .sort((a, b) => b.cantidad - a.cantidad)
+      .slice(0, 10);
 
     const revenueByCategory = await this.computeRevenueByCategory();
 
@@ -71,7 +99,7 @@ export class StatsService {
       revenueByPlatform,
       revenueByPaymentMethod,
       monthlyComparison,
-      lowStockProducts,
+      topReservedProducts,
       revenueByCategory,
       recentOrders: recentPendingOrders,
     };

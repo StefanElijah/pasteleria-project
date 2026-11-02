@@ -151,17 +151,10 @@ export class OrdersService {
             throw new BadRequestException('Debe proporcionar direccionId o direccion temporal');
         }
 
-        // 3. Calcular costo de envío si no viene del front
-        let envioCosto = costoEnvio;
-        let fechaEstimadaEntrega: Date;
-        if (!envioCosto) {
-            const envioCalc = await this.calculateShipping(direccionFinal.comunaId, metodoEnvio);
-            envioCosto = envioCalc.costo;
-            fechaEstimadaEntrega = envioCalc.fechaEstimada;
-        } else {
-            fechaEstimadaEntrega = new Date();
-            fechaEstimadaEntrega.setDate(fechaEstimadaEntrega.getDate() + 3);
-        }
+        // 3. Calcular envío y fecha estimada (siempre desde el servidor)
+        const envioCalc = await this.calculateShipping(direccionFinal.comunaId, metodoEnvio);
+        let envioCosto = costoEnvio ?? envioCalc.costo;
+        const fechaEstimadaEntrega = envioCalc.fechaEstimada;
 
         // 4. Validar productos y calcular subtotal
         let subtotal = 0;
@@ -171,9 +164,6 @@ export class OrdersService {
                 where: { id: item.productId, activo: true },
             });
             if (!product) throw new NotFoundException(`Producto ${item.productId} no encontrado`);
-            if (product.stock < item.quantity) {
-                throw new BadRequestException(`Stock insuficiente para ${product.nombre}`);
-            }
             const unitPrice = product.precio;
             const totalItem = unitPrice * item.quantity;
             subtotal += totalItem;
@@ -287,14 +277,6 @@ export class OrdersService {
                     estadoEnvio: 'PENDIENTE',
                 },
             });
-
-            // Reducir stock (operación atómica)
-            for (const item of finalItems) {
-                await tx.producto.update({
-                    where: { id: item.productId },
-                    data: { stock: { decrement: item.quantity } },
-                });
-            }
 
             // Registrar uso de descuento
             if (descuentoValidoId && userId) {

@@ -5,10 +5,16 @@ export default function EntregaEnviosPage() {
     return (
         <>
             <h1 className="text-3xl font-bold mb-6 text-center">Política de Entrega y Envíos</h1>
+            <p className="text-sm text-gray-500 text-center mb-6"><strong>Última actualización:</strong> 02/11/2026</p>
 
             {/* Info destacada */}
             <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded">
                 <p className="font-semibold text-blue-800">¡Envío gratis! En compras sobre $40.000 en Región Metropolitana y $45.000 en otras regiones</p>
+            </div>
+
+            <div className="bg-rose-50 border-l-4 border-rose-500 p-4 mb-6 rounded">
+                <h3 className="font-bold text-rose-800">Reservas y producción por encargo</h3>
+                <p className="text-rose-700">Los productos se preparan según las reservas confirmadas. La fecha estimada de entrega se calcula automáticamente según la comuna y el método de envío, y se muestra antes de confirmar la reserva. Al no mantener stock inmediato, los plazos pueden ajustarse por disponibilidad de producción; cualquier cambio se informará oportunamente.</p>
             </div>
 
             {/* Tarjetas de zonas */}
@@ -57,7 +63,7 @@ export default function EntregaEnviosPage() {
                         <li><strong>Horario extendido:</strong> 20:00 - 22:00 hrs (+$1.500)</li>
                     </ul>
                     <ul className="list-disc list-inside space-y-1">
-                        <li><strong>Pedidos express:</strong> Mismo día (+50% del valor envío)</li>
+                        <li><strong>Pedidos express:</strong> Mismo día, sujeto a disponibilidad de producción (+50% del valor envío)</li>
                         <li><strong>Zonas extremas:</strong> Consultar disponibilidad y costos</li>
                     </ul>
                 </div>
@@ -116,7 +122,7 @@ export default function EntregaEnviosPage() {
                         <ul className="space-y-1">
                             <li><strong>1ra visita:</strong> Llamado de coordinación</li>
                             <li><strong>2da visita:</strong> Reprogramación con costo $1.500</li>
-                            <li><strong>3ra visita:</strong> Producto regresa a bodega</li>
+                            <li><strong>3ra visita:</strong> Producto regresa a la pastelería</li>
                             <li><strong>Productos perecederos:</strong> No se guardan más de 24h</li>
                         </ul>
                     </div>

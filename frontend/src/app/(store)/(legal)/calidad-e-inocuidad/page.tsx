@@ -2,9 +2,11 @@ export default function CalidadInocuidadPage() {
     return (
         <>
             <h1 className="text-3xl font-bold mb-6 text-center">Política de Calidad e Inocuidad</h1>
+            <p className="text-sm text-gray-500 text-center mb-6"><strong>Última actualización:</strong> 02/11/2026</p>
             <div className="prose prose-sm sm:prose lg:prose-lg max-w-none">
                 <h2>1. Estándares de Calidad</h2>
                 <p>Cumplimos con los más altos estándares de calidad e higiene según normativas MINSAL.</p>
+                <p>Elaboramos por encargo según las reservas confirmadas, lo que nos permite entregar productos frescos y reducir desperdicios.</p>
 
                 <h2>2. Ingredientes Premium</h2>
                 <p>Utilizamos únicamente ingredientes frescos y de primera calidad.</p>

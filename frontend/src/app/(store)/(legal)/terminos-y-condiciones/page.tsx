@@ -3,7 +3,7 @@ export default function TerminosCondicionesPage() {
         <>
             <h1 className="text-3xl font-bold mb-6 text-center">Términos y Condiciones</h1>
             <div className="prose prose-sm sm:prose lg:prose-lg max-w-none">
-                <p><strong>Última actualización:</strong> [DD/MM/YYYY]</p>
+                <p><strong>Última actualización:</strong> 02/11/2026</p>
 
                 <h2>1. Identificación</h2>
                 <p><strong>Empresa:</strong> Pastelería Mil Sabores<br />
@@ -12,19 +12,19 @@ export default function TerminosCondicionesPage() {
                     <strong>Dirección:</strong> [Dirección completa]</p>
 
                 <h2>2. Aceptación</h2>
-                <p>Al usar este sitio y comprar, aceptas estos Términos y Condiciones.</p>
+                <p>Al usar este sitio y realizar una reserva o compra, aceptas estos Términos y Condiciones.</p>
 
                 <h2>3. Productos, precios y disponibilidad</h2>
-                <p>Los precios publicados podrán cambiar y la disponibilidad está sujeta a stock.</p>
+                <p>Los precios publicados podrán cambiar. Los productos se ofrecen mediante reservas y están sujetos a disponibilidad de producción. No mantenemos stock inmediato: la disponibilidad se confirma al momento de realizar la reserva y la fecha estimada de entrega se informa antes de confirmar.</p>
 
-                <h2>4. Pedido y confirmación</h2>
-                <p>Recibirás una confirmación por correo con los detalles del pedido.</p>
+                <h2>4. Pedido, reserva y confirmación</h2>
+                <p>Tu pedido se registra como una reserva. La confirmación es automática y recibirás un correo con los detalles del pedido. La fecha estimada de entrega se calcula según la comuna y el método de envío, y se muestra antes de confirmar la reserva.</p>
 
                 <h2>5. Pagos</h2>
                 <p>Aceptamos los medios de pago indicados en el sitio. Los pagos se procesan con los proveedores indicados.</p>
 
                 <h2>6. Envíos y entregas</h2>
-                <p>Los plazos dependen de la modalidad elegida y de la comuna de entrega. Los costos se informan antes de finalizar la compra.</p>
+                <p>Los plazos dependen de la modalidad elegida y de la comuna de entrega. Los costos y la fecha estimada se informan antes de finalizar la compra. Al trabajar por encargo, la fecha estimada puede variar según la disponibilidad de producción; cualquier cambio se informará oportunamente.</p>
 
                 <h2>7. Derecho a retracto</h2>
                 <p>En compras a distancia, tienes derecho a retractarte en 10 días desde la recepción del producto, salvo excepciones por la naturaleza del bien (p. ej. productos perecibles o personalizados). Para más detalle revisa nuestra política de devoluciones.</p>

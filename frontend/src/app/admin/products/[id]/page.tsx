@@ -148,10 +148,6 @@ export default function ProductDetailPage() {
                         )}
                     </div>
                     <div>
-                        <span className="text-sm text-gray-500">Stock</span>
-                        <p className="text-lg font-medium">{product.stock}</p>
-                    </div>
-                    <div>
                         <span className="text-sm text-gray-500">Categoría</span>
                         <p className="text-lg font-medium">{product.categoria?.nombre || '—'}</p>
                     </div>
