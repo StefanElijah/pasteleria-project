@@ -124,9 +124,18 @@
   html {
     @apply font-sans;
     overflow-x: hidden;
+    scrollbar-gutter: stable;
   }
   body {
     @apply bg-background text-foreground;
     overflow-x: hidden;
+  }
+  html body[data-scroll-locked] {
+    padding-right: 0 !important;
+    margin-right: 0 !important;
+    --removed-body-scroll-bar-size: 0px !important;
+  }
+  html:has(body[data-scroll-locked]) {
+    overflow-y: hidden;
   }
 }
