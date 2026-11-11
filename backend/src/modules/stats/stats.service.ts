@@ -153,8 +153,9 @@ export class StatsService {
       const key = d.toISOString().slice(0, 10);
       const entry = map.get(key);
       if (!entry) continue;
-      if (o.plataforma === 'MOBILE') entry.mobile += o.total;
-      else if (o.plataforma === 'DESKTOP') entry.desktop += o.total;
+      const plataforma = (o.plataforma || '').toUpperCase();
+      if (plataforma === 'MOBILE') entry.mobile += o.total;
+      else if (plataforma === 'DESKTOP') entry.desktop += o.total;
     }
 
     return Array.from(map.entries()).map(([date, { mobile, desktop }]) => ({

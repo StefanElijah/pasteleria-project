@@ -16,7 +16,7 @@ export class OrdersController {
         const userId = req.user?.userId || null;
         let cartId = req.headers['x-cart-id'] || req.cookies?.cartId;
         if (userId) cartId = `user:${userId}`;
-        return this.ordersService.create(userId, createOrderDto, cartId);
+        return this.ordersService.create(userId, createOrderDto, cartId, req.headers['user-agent']);
     }
 
     @Get('numero/:numeroPedido')

@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import api from '@/lib/axios';
 import { deleteDraft } from '@/lib/checkout';
+import { detectPlataforma } from '@/lib/platform';
 
 export default function ReviewStep() {
     const {
@@ -85,6 +86,7 @@ export default function ReviewStep() {
                 primerApellidoDestinatario: shippingInfo.primerApellidoDestinatario,
                 emailDestinatario: shippingInfo.emailDestinatario,
                 telefonoDestinatario: shippingInfo.telefonoDestinatario,
+                plataforma: detectPlataforma(),
             };
 
             const response = await api.post('/orders', orderData);

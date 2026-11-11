@@ -49,10 +49,20 @@ export class OrdersService {
         return { costo, fechaEstimada };
     }
 
+    private resolvePlataforma(plataforma?: string, userAgent?: string): 'MOBILE' | 'DESKTOP' {
+        const normalized = (plataforma || '').trim().toUpperCase();
+        if (normalized === 'MOBILE' || normalized === 'DESKTOP') return normalized;
+
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(userAgent || '')
+            ? 'MOBILE'
+            : 'DESKTOP';
+    }
+
     async create(
         userId: string | null,
         createOrderDto: CreateOrderDto,
         cartId?: string,
+        userAgent?: string,
     ) {
         const {
             items,
@@ -73,6 +83,8 @@ export class OrdersService {
             guardarDireccion,
             direccionGuardadaId,
         } = createOrderDto;
+
+        const plataformaFinal = this.resolvePlataforma(plataforma, userAgent);
 
         // Normalización de nombres del destinatario
         const nombreDestinatario = toTitleCase(primerNombreDestinatario) as string;
@@ -261,7 +273,7 @@ export class OrdersService {
                     transaccionId,
                     comprobantePago,
                     trackingToken,
-                    plataforma: plataforma || null,
+                    plataforma: plataformaFinal,
                     puntosUsados,
                     items: { create: orderItemsData },
                 },

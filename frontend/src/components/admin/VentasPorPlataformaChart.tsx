@@ -117,7 +117,6 @@ const VentasPorPlataformaChart = memo(function VentasPorPlataformaChart({ revenu
                 content={
                   <ChartTooltipContent
                     className="w-[150px]"
-                    nameKey="views"
                     labelFormatter={(value: string) => {
                       return new Date(value + 'T12:00:00').toLocaleDateString('es-CL', {
                         month: 'short',
