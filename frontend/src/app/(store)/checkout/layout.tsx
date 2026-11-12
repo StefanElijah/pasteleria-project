@@ -19,19 +19,21 @@ const STEPS = [
 ];
 
 export default function CheckoutLayout({ children }: { children: React.ReactNode }) {
-    const { user, isLoading } = useAuthStore();
+    const { isLoading } = useAuthStore();
     const { items, total, subtotal, discount, isHydrated } = useCartStore();
     const { shippingCost, shippingInfo } = useCheckoutStore();
     const orderCompleted = useCheckoutFlowStore((s) => s.orderCompleted);
     const pathname = usePathname();
     const router = useRouter();
+    const isResultPage =
+        pathname.startsWith('/checkout/success') || pathname.startsWith('/checkout/cancel');
 
     useCheckoutDraft();
 
     useEffect(() => {
         if (!isHydrated) return;
         // No redirigir mientras se muestra la confirmación del pedido
-        if (orderCompleted) return;
+        if (orderCompleted || isResultPage) return;
         if (items.length === 0 && pathname !== '/checkout') {
             router.replace('/checkout');
             return;
@@ -41,7 +43,7 @@ export default function CheckoutLayout({ children }: { children: React.ReactNode
                 router.replace('/checkout/shipping');
             }
         }
-    }, [pathname, items.length, shippingInfo, isHydrated, router, orderCompleted]);
+    }, [pathname, items.length, shippingInfo, isHydrated, router, orderCompleted, isResultPage]);
 
     const currentStepIndex = STEPS.findIndex((s) => pathname === s.path || pathname.startsWith(s.path + '?'));
     const activeStep = currentStepIndex >= 0 ? currentStepIndex : 0;
@@ -53,6 +55,14 @@ export default function CheckoutLayout({ children }: { children: React.ReactNode
 
     if (isLoading || !isHydrated) {
         return <div className="min-h-screen flex items-center justify-center">Cargando...</div>;
+    }
+
+    if (isResultPage) {
+        return (
+            <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
+                {children}
+            </div>
+        );
     }
 
     if (items.length === 0 && activeStep < 3 && !orderCompleted) {

@@ -11,11 +11,13 @@ import { useEffect, useState } from 'react';
 import api from '@/lib/axios';
 import { deleteDraft } from '@/lib/checkout';
 import { detectPlataforma } from '@/lib/platform';
+import { createStripeCheckoutSession } from '@/lib/payments';
 
 export default function ReviewStep() {
     const {
         shippingInfo, paymentMethod, shippingMethod, setShippingCost, shippingCost,
         reset: resetCheckout, saveAddress, selectedAddressId, puntosUsados, setPuntosUsados,
+        pendingOrderId, pendingOrderToken, pendingOrderTotal, setPendingOrder, clearPendingOrder,
     } = useCheckoutStore();
     const setOrderCompleted = useCheckoutFlowStore((s) => s.setOrderCompleted);
     const { items, total, subtotal, discount, clearCart } = useCartStore();
@@ -35,7 +37,7 @@ export default function ReviewStep() {
     const displayShipping = shippingCost || 0;
     const maxPuntos = Math.min(puntosSaldo, Math.floor(displaySubtotal * 0.5));
     const envioGratis = discount?.tipo === 'ENVIO_GRATIS';
-    const displayTotal = total + displayShipping - puntosUsados;
+    const displayTotal = total + (envioGratis ? 0 : displayShipping) - puntosUsados;
 
     useEffect(() => {
         if (!user) return;
@@ -88,6 +90,33 @@ export default function ReviewStep() {
                 telefonoDestinatario: shippingInfo.telefonoDestinatario,
                 plataforma: detectPlataforma(),
             };
+
+            if (paymentMethod === 'TARJETA') {
+                const totalActual = Math.max(0, Math.round(displayTotal));
+                const puedeReutilizar =
+                    !!pendingOrderId &&
+                    pendingOrderTotal !== null &&
+                    Math.abs(pendingOrderTotal - totalActual) <= 1;
+
+                let orderId = pendingOrderId;
+                let orderToken = pendingOrderToken;
+
+                if (!puedeReutilizar) {
+                    if (pendingOrderId) clearPendingOrder();
+                    const created = await api.post('/orders', orderData);
+                    orderId = created.data.id;
+                    orderToken = created.data.trackingToken;
+                    setPendingOrder(created.data.id, created.data.trackingToken, created.data.total);
+                }
+
+                if (!orderId) {
+                    throw new Error('No se pudo crear el pedido para el pago');
+                }
+
+                const session = await createStripeCheckoutSession(orderId, orderToken);
+                window.location.href = session.url;
+                return;
+            }
 
             const response = await api.post('/orders', orderData);
             // Marcar completado ANTES de vaciar el carrito para que el layout
@@ -276,7 +305,7 @@ export default function ReviewStep() {
                         {paymentMethod === 'EFECTIVO'
                             ? 'Efectivo'
                             : paymentMethod === 'TARJETA'
-                            ? 'Tarjeta'
+                            ? 'Tarjeta (Stripe - modo prueba)'
                             : paymentMethod === 'TRANSFERENCIA'
                             ? 'Transferencia'
                             : 'Pago contra entrega'}
@@ -353,7 +382,13 @@ export default function ReviewStep() {
                         disabled={isSubmitting || calculatingShipping}
                         className="bg-rose-600 hover:bg-rose-700"
                     >
-                        {isSubmitting ? 'Procesando...' : 'Confirmar pedido'}
+                        {isSubmitting
+                            ? paymentMethod === 'TARJETA'
+                                ? 'Redirigiendo a Stripe...'
+                                : 'Procesando...'
+                            : paymentMethod === 'TARJETA'
+                            ? 'Pagar con tarjeta'
+                            : 'Confirmar pedido'}
                     </Button>
                 </div>
             </div>

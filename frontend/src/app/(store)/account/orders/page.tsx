@@ -7,6 +7,7 @@ import { useOrderStatus } from '@/hooks/useOrderStatus';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { PaymentStatusBadge } from '@/components/ui/PaymentStatusBadge';
 import { Package, ChevronRight } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';
 
@@ -83,6 +84,7 @@ function OrdersContent() {
                                     >
                                         {statusInfo.labels[order.estado as keyof typeof statusInfo.labels] || order.estado}
                                     </span>
+                                    <PaymentStatusBadge status={order.estadoPago} />
                                 </div>
                                 <p className="text-sm text-gray-500">
                                     {new Date(order.createdAt).toLocaleDateString('es-CL', { year: 'numeric', month: 'long', day: 'numeric' })} · {order.items.length} producto{order.items.length !== 1 ? 's' : ''}

@@ -46,6 +46,17 @@ export default function PaymentStep() {
                 })}
             </div>
 
+            {paymentMethod === 'TARJETA' && (
+                <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-900">
+                    <p className="font-semibold mb-1">Pago seguro con Stripe (modo prueba)</p>
+                    <p>
+                        Serás redirigido a la página de Stripe para ingresar los datos de tu tarjeta.
+                        Usa la tarjeta de prueba <strong>4242 4242 4242 4242</strong>, cualquier fecha
+                        futura y cualquier CVC. No se realizará ningún cobro real.
+                    </p>
+                </div>
+            )}
+
             <div className="flex justify-between mt-8">
                 <Button variant="outline" onClick={() => router.push('/checkout/shipping')}>
                     <ArrowLeft className="w-4 h-4 mr-2" /> Anterior

@@ -9,6 +9,7 @@ import { OrderStatusBadge } from '@/components/admin/OrderStatusBadge';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { PaymentStatusBadge } from '@/components/ui/PaymentStatusBadge';
 import { toast } from 'sonner';
 
 const ESTADO_DEVOLUCION_LABEL: Record<string, string> = {
@@ -88,6 +89,15 @@ function OrderDetailContent() {
             <div className="border rounded p-4 space-y-4">
                 <div>
                     <strong>Estado:</strong> <OrderStatusBadge status={order.estado} statusInfo={statusInfo} />
+                </div>
+                <div>
+                    <strong>Estado de pago:</strong> <PaymentStatusBadge status={order.estadoPago} />
+                    {order.pagadoEn && (
+                        <span className="text-sm text-gray-500">
+                            {' '}
+                            ({new Date(order.pagadoEn).toLocaleDateString('es-CL')})
+                        </span>
+                    )}
                 </div>
                 <div>
                     <strong>Fecha:</strong> {new Date(order.createdAt).toLocaleDateString()}

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import api from '@/lib/axios';
 import { Order } from '@/types';
 import { OrderStatusBadge } from '@/components/admin/OrderStatusBadge';
+import { PaymentStatusBadge } from '@/components/ui/PaymentStatusBadge';
 import { Button } from '@/components/ui/button';
 
 export default function AdminOrdersPage() {
@@ -31,6 +32,7 @@ export default function AdminOrdersPage() {
                             <th className="p-3">Cliente</th>
                             <th className="p-3">Total</th>
                             <th className="p-3">Estado</th>
+                            <th className="p-3">Pago</th>
                             <th className="p-3">Acciones</th>
                         </tr>
                     </thead>
@@ -42,6 +44,7 @@ export default function AdminOrdersPage() {
                                 <td className="p-3">{order.primerNombreDestinatario} {order.primerApellidoDestinatario}</td>
                                 <td className="p-3">${order.total.toLocaleString()}</td>
                                 <td className="p-3"><OrderStatusBadge status={order.estado} /></td>
+                                <td className="p-3"><PaymentStatusBadge status={order.estadoPago} /></td>
                                 <td className="p-3">
                                     <Link href={`/admin/orders/${order.id}`}>
                                         <Button variant="outline" size="sm">Ver detalle</Button>

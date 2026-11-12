@@ -5,6 +5,7 @@ import api from '@/lib/axios';
 import { Order } from '@/types';
 import { useOrderStatus } from '@/hooks/useOrderStatus';
 import { OrderStatusBadge } from '@/components/admin/OrderStatusBadge';
+import { PaymentStatusBadge } from '@/components/ui/PaymentStatusBadge';
 import { Loader2, Package, X } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -55,8 +56,9 @@ export default function TrackOrderPage() {
             <div className="mb-6 flex items-center gap-3">
                 <div>
                     <h1 className="text-2xl font-bold">Pedido {order.numeroPedido}</h1>
-                    <div className="mt-1">
+                    <div className="mt-1 flex flex-wrap items-center gap-2">
                         <OrderStatusBadge status={order.estado} statusInfo={statusInfo} />
+                        <PaymentStatusBadge status={order.estadoPago} />
                     </div>
                 </div>
             </div>
@@ -88,6 +90,12 @@ export default function TrackOrderPage() {
                         month: 'long',
                         day: 'numeric',
                     })}
+                </div>
+                <div>
+                    <strong>Método de pago:</strong> {order.metodoPago}
+                </div>
+                <div>
+                    <strong>Estado de pago:</strong> <PaymentStatusBadge status={order.estadoPago} />
                 </div>
                 <div>
                     <strong>Destinatario:</strong> {order.primerNombreDestinatario} {order.primerApellidoDestinatario}

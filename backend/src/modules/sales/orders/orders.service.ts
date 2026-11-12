@@ -1,6 +1,6 @@
 import { Injectable, Inject, BadRequestException, NotFoundException, ForbiddenException } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
-import { EstadoPedido } from '@prisma/client';
+import { EstadoPago, EstadoPedido } from '@prisma/client';
 import { CartService } from '@modules/sales/cart/cart.service';
 import { LoyaltyService } from '@modules/loyalty/loyalty.service';
 import { toTitleCase } from '@/lib/normalize-name';
@@ -63,6 +63,7 @@ export class OrdersService {
         createOrderDto: CreateOrderDto,
         cartId?: string,
         userAgent?: string,
+        options?: { clearCart?: boolean },
     ) {
         const {
             items,
@@ -275,6 +276,7 @@ export class OrdersService {
                     trackingToken,
                     plataforma: plataformaFinal,
                     puntosUsados,
+                    cartId: cartId || null,
                     items: { create: orderItemsData },
                 },
                 include: { items: true, direccion: { include: { comuna: { include: { region: true } }, ciudad: true } } },
@@ -322,8 +324,8 @@ export class OrdersService {
                 });
             }
 
-            // Vaciar carrito
-            if (cartId) {
+            // Vaciar carrito (los pagos con tarjeta lo vacían al confirmarse)
+            if (cartId && options?.clearCart !== false) {
                 await this.cartService.clearCart(cartId);
             }
 
@@ -358,6 +360,19 @@ export class OrdersService {
                 items: { include: { producto: true } },
                 direccion: { include: { comuna: { include: { region: true } }, ciudad: true } },
                 envio: true,
+                pagos: {
+                    select: {
+                        id: true,
+                        proveedor: true,
+                        estado: true,
+                        monto: true,
+                        moneda: true,
+                        metodoDetalle: true,
+                        pagadoEn: true,
+                        createdAt: true,
+                        updatedAt: true,
+                    },
+                },
             },
         });
         if (!order) throw new NotFoundException('Pedido no encontrado');
@@ -437,6 +452,36 @@ export class OrdersService {
         }
 
         return updated;
+    }
+
+    async updatePaymentStatus(
+        id: string,
+        estadoPago: EstadoPago,
+        userId: string,
+        rol?: string,
+    ) {
+        if (rol !== 'ADMIN' && rol !== 'MODERADOR') {
+            throw new ForbiddenException('No tienes permisos para cambiar el estado del pago');
+        }
+
+        const order = await this.findOne(id, userId, rol);
+
+        if (estadoPago !== 'PAGADO') {
+            throw new BadRequestException('Solo se puede marcar un pago manual como PAGADO');
+        }
+
+        if (order.metodoPago === 'TARJETA') {
+            throw new BadRequestException(
+                'Los pagos con tarjeta se confirman automáticamente desde Stripe',
+            );
+        }
+
+        if (order.estadoPago === 'PAGADO') return order;
+
+        return this.prisma.pedido.update({
+            where: { id },
+            data: { estadoPago: 'PAGADO', pagadoEn: new Date() },
+        });
     }
 
     getStatusInfo() {

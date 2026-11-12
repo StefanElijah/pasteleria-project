@@ -4,7 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 import cookieParser from 'cookie-parser';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { rawBody: true });
   app.use(cookieParser());
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.setGlobalPrefix('api');
@@ -27,6 +27,8 @@ async function bootstrap() {
   });
 
   await app.listen(process.env.PORT ?? 3001);
-  console.log(`Backend corriendo en http://localhost:${process.env.PORT ?? 3001}`);
+  console.log(
+    `Backend corriendo en http://localhost:${process.env.PORT ?? 3001}`,
+  );
 }
 bootstrap();

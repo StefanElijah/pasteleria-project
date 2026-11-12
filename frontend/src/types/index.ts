@@ -110,10 +110,27 @@ export interface OrderItem {
     producto: Product;
 }
 
+export type EstadoPago = 'PENDIENTE' | 'PAGADO' | 'FALLIDO' | 'CANCELADO' | 'REEMBOLSADO';
+
+export interface Pago {
+    id: string;
+    proveedor: 'STRIPE' | 'MERCADO_PAGO' | 'FLOW' | 'WEBPAY';
+    estado: EstadoPago;
+    monto: number;
+    moneda: string;
+    metodoDetalle?: string | null;
+    pagadoEn?: string | null;
+    createdAt: string;
+    updatedAt: string;
+}
+
 export interface Order {
     id: string;
     numeroPedido: string;
     estado: 'PENDIENTE' | 'PREPARANDO' | 'ENVIADO' | 'EN_REPARTO' | 'ENTREGADO' | 'INTENTO_FALLIDO' | 'RETRASADO' | 'DEVUELTO' | 'CANCELADO';
+    estadoPago: EstadoPago;
+    pagadoEn?: string | null;
+    transaccionId?: string | null;
     subtotal: number;
     costoEnvio: number;
     total: number;
@@ -131,6 +148,7 @@ export interface Order {
     direccion: Address;
     items: OrderItem[];
     envio: Envio;
+    pagos?: Pago[];
 }
 
 export interface Envio {

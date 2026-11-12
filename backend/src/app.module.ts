@@ -21,6 +21,7 @@ import { LoyaltyModule } from '@modules/loyalty/loyalty.module';
 import { DiscountsModule } from '@modules/discounts/discounts.module';
 import { PromocionesModule } from '@modules/promociones/promociones.module';
 import { DevolucionesModule } from '@modules/sales/devoluciones/devoluciones.module';
+import { PaymentsModule } from '@modules/payments/payments.module';
 
 @Module({
   imports: [
@@ -45,7 +46,8 @@ import { DevolucionesModule } from '@modules/sales/devoluciones/devoluciones.mod
     LoyaltyModule,
     DiscountsModule,
     PromocionesModule,
-    DevolucionesModule
+    DevolucionesModule,
+    PaymentsModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}

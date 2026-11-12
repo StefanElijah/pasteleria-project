@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, UseGuards, Req, Query } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './dto/create-order.dto';
+import { UpdatePaymentStatusDto } from './dto/update-payment-status.dto';
 import { JwtAuthGuard } from '@modules/auth/guards/jwt-auth.guard';
 import { OptionalJwtAuthGuard } from '@modules/auth/guards/optional-jwt.guard';
 import { RolesGuard } from '@modules/auth/guards/roles.guard';
@@ -16,7 +17,13 @@ export class OrdersController {
         const userId = req.user?.userId || null;
         let cartId = req.headers['x-cart-id'] || req.cookies?.cartId;
         if (userId) cartId = `user:${userId}`;
-        return this.ordersService.create(userId, createOrderDto, cartId, req.headers['user-agent']);
+        return this.ordersService.create(
+            userId,
+            createOrderDto,
+            cartId,
+            req.headers['user-agent'],
+            { clearCart: createOrderDto.metodoPago !== 'TARJETA' },
+        );
     }
 
     @Get('numero/:numeroPedido')
@@ -57,5 +64,21 @@ export class OrdersController {
     @Roles('ADMIN', 'MODERADOR')
     async updateStatus(@Param('id') id: string, @Body('estado') estado: string, @Req() req: any) {
         return this.ordersService.updateStatus(id, estado as any, req.user.userId, req.user.rol);
+    }
+
+    @Patch(':id/payment-status')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles('ADMIN', 'MODERADOR')
+    async updatePaymentStatus(
+        @Param('id') id: string,
+        @Body() dto: UpdatePaymentStatusDto,
+        @Req() req: any,
+    ) {
+        return this.ordersService.updatePaymentStatus(
+            id,
+            dto.estadoPago,
+            req.user.userId,
+            req.user.rol,
+        );
     }
 }

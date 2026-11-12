@@ -61,6 +61,21 @@ enum MetodoPago {
   PAGO_ENTREGA
 }
 
+enum EstadoPago {
+  PENDIENTE
+  PAGADO
+  FALLIDO
+  CANCELADO
+  REEMBOLSADO
+}
+
+enum ProveedorPago {
+  STRIPE
+  MERCADO_PAGO
+  FLOW
+  WEBPAY
+}
+
 // ==========================================
 // MODELOS DE USUARIOS Y PERFILES (Estrictos)
 // ==========================================
@@ -320,8 +335,11 @@ model Pedido {
   updatedAt    DateTime     @updatedAt
 
   // Campos agregados para Pasarelas de Pago externas
-  transaccionId   String? @unique
+  transaccionId   String?     @unique
   comprobantePago String?
+  estadoPago      EstadoPago  @default(PENDIENTE)
+  pagadoEn        DateTime?
+  cartId          String? // Carrito de Redis a vaciar cuando el pago se confirme
 
   // Datos del destinatario (Snapshot histórico)
   primerNombreDestinatario   String
@@ -355,14 +373,51 @@ model Pedido {
 
   movimientosPuntos MovimientoPuntos[]
   devoluciones      Devolucion[]
+  pagos             Pago[]
 
   @@index([usuarioId])
   @@index([numeroPedido])
   @@index([estado])
+  @@index([estadoPago])
   @@index([createdAt])
   @@index([descuentoId])
   @@index([trackingToken])
   @@map("pedidos")
+}
+
+model Pago {
+  id              String        @id @default(cuid())
+  pedidoId        String
+  pedido          Pedido        @relation(fields: [pedidoId], references: [id], onDelete: Cascade)
+  proveedor       ProveedorPago
+  proveedorRef    String // ID de la sesión/preferencia/transacción en el proveedor
+  proveedorPagoId String? // ID del pago confirmado (ej. PaymentIntent de Stripe)
+  estado          EstadoPago    @default(PENDIENTE)
+  monto           Int
+  moneda          String        @default("CLP")
+  metodoDetalle   String?
+  payload         Json?
+  pagadoEn        DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@unique([proveedor, proveedorRef])
+  @@index([pedidoId])
+  @@index([estado])
+  @@map("pagos")
+}
+
+model WebhookEvento {
+  id          String        @id @default(cuid())
+  proveedor   ProveedorPago
+  eventoId    String        @unique
+  tipo        String
+  payload     Json?
+  procesadoEn DateTime      @default(now())
+
+  @@index([proveedor, tipo])
+  @@index([procesadoEn])
+  @@map("webhook_eventos")
 }
 
 model ItemPedido {

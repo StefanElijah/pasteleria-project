@@ -17,6 +17,7 @@ export class StatsService {
 
     const revenueResult = await this.prisma.pedido.aggregate({
       _sum: { total: true },
+      where: this.paidRevenueWhere(),
     });
     const totalRevenue = revenueResult._sum.total || 0;
 
@@ -50,6 +51,7 @@ export class StatsService {
         pedido: {
           createdAt: { gte: thirtyDaysAgo },
           estado: { not: 'CANCELADO' },
+          ...this.paidRevenueWhere(),
         },
       },
       select: {
@@ -117,6 +119,7 @@ export class StatsService {
     }
 
     for (const o of orders) {
+      if (!this.isPaidRevenue(o)) continue;
       const d = new Date(o.createdAt);
       d.setHours(0, 0, 0, 0);
       const key = d.toISOString().slice(0, 10);
@@ -148,6 +151,7 @@ export class StatsService {
     }
 
     for (const o of orders) {
+      if (!this.isPaidRevenue(o)) continue;
       const d = new Date(o.createdAt);
       d.setHours(0, 0, 0, 0);
       const key = d.toISOString().slice(0, 10);
@@ -177,6 +181,7 @@ export class StatsService {
     }
 
     for (const o of orders) {
+      if (!this.isPaidRevenue(o)) continue;
       const d = new Date(o.createdAt);
       d.setHours(0, 0, 0, 0);
       const key = d.toISOString().slice(0, 10);
@@ -209,6 +214,7 @@ export class StatsService {
     }
 
     for (const o of orders) {
+      if (!this.isPaidRevenue(o)) continue;
       const d = new Date(o.createdAt);
       const m = d.getMonth() + 1;
       const y = d.getFullYear();
@@ -226,8 +232,24 @@ export class StatsService {
     }));
   }
 
+  private isPaidRevenue(order: any): boolean {
+    return order.metodoPago !== 'TARJETA' || order.estadoPago === 'PAGADO';
+  }
+
+  private paidRevenueWhere() {
+    return {
+      OR: [
+        { metodoPago: { not: 'TARJETA' } },
+        { metodoPago: 'TARJETA', estadoPago: 'PAGADO' },
+      ],
+    };
+  }
+
   private async computeRevenueByCategory() {
     const items = await this.prisma.itemPedido.findMany({
+      where: {
+        pedido: this.paidRevenueWhere(),
+      },
       include: {
         producto: { include: { categoria: true } },
       },

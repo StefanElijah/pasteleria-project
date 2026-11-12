@@ -27,6 +27,9 @@ interface CheckoutState {
     puntosUsados: number;
     saveAddress: boolean;
     selectedAddressId: string | null;
+    pendingOrderId: string | null;
+    pendingOrderToken: string | null;
+    pendingOrderTotal: number | null;
     setShippingInfo: (info: Partial<ShippingInfo>) => void;
     setPaymentMethod: (method: string) => void;
     setShippingMethod: (method: string) => void;
@@ -34,6 +37,8 @@ interface CheckoutState {
     setPuntosUsados: (puntos: number) => void;
     setSaveAddress: (value: boolean) => void;
     setSelectedAddressId: (id: string | null) => void;
+    setPendingOrder: (orderId: string, token?: string | null, total?: number | null) => void;
+    clearPendingOrder: () => void;
     reset: () => void;
 }
 
@@ -65,6 +70,9 @@ export const useCheckoutStore = create<CheckoutState>()(
             puntosUsados: 0,
             saveAddress: false,
             selectedAddressId: null,
+            pendingOrderId: null,
+            pendingOrderToken: null,
+            pendingOrderTotal: null,
             setShippingInfo: (info) =>
                 set((state) => ({ shippingInfo: { ...state.shippingInfo, ...info } })),
             setPaymentMethod: (method) => set({ paymentMethod: method }),
@@ -73,6 +81,18 @@ export const useCheckoutStore = create<CheckoutState>()(
             setPuntosUsados: (puntos) => set({ puntosUsados: puntos }),
             setSaveAddress: (value) => set({ saveAddress: value }),
             setSelectedAddressId: (id) => set({ selectedAddressId: id }),
+            setPendingOrder: (orderId, token = null, total = null) =>
+                set({
+                    pendingOrderId: orderId,
+                    pendingOrderToken: token,
+                    pendingOrderTotal: total,
+                }),
+            clearPendingOrder: () =>
+                set({
+                    pendingOrderId: null,
+                    pendingOrderToken: null,
+                    pendingOrderTotal: null,
+                }),
             reset: () =>
                 set({
                     shippingInfo: defaultShippingInfo,
@@ -82,6 +102,9 @@ export const useCheckoutStore = create<CheckoutState>()(
                     puntosUsados: 0,
                     saveAddress: false,
                     selectedAddressId: null,
+                    pendingOrderId: null,
+                    pendingOrderToken: null,
+                    pendingOrderTotal: null,
                 }),
         }),
         { name: 'checkout-storage', storage: createJSONStorage(() => localStorage) }
